@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import grid from './stuffReducer';
+import grid from './gridReducer';
 
 const rootReducer = combineReducers({
   grid

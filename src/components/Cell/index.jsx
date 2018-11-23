@@ -12,10 +12,19 @@ class Cell extends React.Component {
         row: PropTypes.number.isRequired,
         col: PropTypes.number.isRequired,
     }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        const aaa = (
+            this.props.cursorLocation !== nextProps.cursorLocation &&
+            (this.isCursor(this.props.cursorLocation) || this.isCursor(nextProps.cursorLocation))
+        )
+        if (aaa) {
+            return true
+        } else { return false }
+    }
     
-    isCursor = () => {
+    isCursor = (cursorLocation = this.props.cursorLocation) => {
         const {
-            cursorLocation,
             col,
             row,
         } = this.props
@@ -36,6 +45,8 @@ class Cell extends React.Component {
     }
 
     render() {
+        console.log('cellrender' + this.props.col + ' ' + this.props.row);
+        
         return (
             <div className={this.getClass()}>
                 {this.renderCell()}
@@ -45,6 +56,8 @@ class Cell extends React.Component {
 }
 
 function mapStateToProps(state) {
+    // console.log(state.grid.cursorLocation);
+    
     return {
         cursorLocation: state.grid.cursorLocation,
     }

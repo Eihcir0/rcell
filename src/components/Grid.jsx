@@ -8,6 +8,7 @@ import HeaderRow from './Rows/HeaderRow'
 import HeaderColumn from './HeaderColumn'
 import HeaderCell from './Cell/HeaderCell'
 import Rows from './Rows'
+import KeyBindings from './KeyBindings'
 
 class Grid extends React.Component {
     static propTypes = {
@@ -15,8 +16,10 @@ class Grid extends React.Component {
     }
 
     render() {
+        console.log('rendering grid')
         return (
             <div className="grid">
+                <KeyBindings/>
                 <HeaderCell type="selectAll"/>
                 <HeaderRow/>
                 <HeaderColumn/>

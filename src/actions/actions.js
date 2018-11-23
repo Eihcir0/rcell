@@ -1,7 +1,9 @@
-import * as constants from './constants';
+// import * as constants from './constants';
+import { SET_CURSOR } from './constants'
 
 export function receiveStuff(data) {
-    return {type: constants.RECEIVE_STUFF, stuff: data};
+    return {}
+    // return {type: constants.RECEIVE_STUFF, stuff: data};
 }
 
 export function fetchStuff() {
@@ -26,4 +28,8 @@ export function fetchStuff() {
                 }
             });
     };
+}
+
+export const setCursor = ([row, col]) => {
+    return {type: SET_CURSOR, location: [row, col]}
 }

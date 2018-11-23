@@ -13,10 +13,8 @@ class HeaderColumn extends React.Component {
     }
 
     renderHeaderCells = () => {
-        console.log('HeaderColumn', this.props.totalRows)
         let cols = []
         for (let rowIdx = 0; rowIdx < this.props.totalRows; rowIdx++) {
-            console.log(rowIdx)
             cols.push(
                 <HeaderCell
                     type={'row'}
@@ -30,6 +28,7 @@ class HeaderColumn extends React.Component {
 
 
     render() {
+        console.log('rendering header column')
         return (
             <div className="header-column">
                 {this.renderHeaderCells()}
@@ -40,11 +39,9 @@ class HeaderColumn extends React.Component {
 
 function mapStateToProps(state) {
     const {
-        cursorLocation,
         totalRows,
     } = state.grid
     return {
-        cursorLocation,
         totalRows,
     }
 }

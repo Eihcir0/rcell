@@ -25,6 +25,7 @@ class Rows extends React.Component {
     }
 
     render() {
+        console.log('rendering rows')
         return (
             <div className="rows">
                 {this.renderRows()}

@@ -11,7 +11,6 @@ class Row extends React.Component {
     }
 
     renderCells = () => {
-        console.log(this.props.totalCols)
         let cols = []
         for (let colIdx = 0; colIdx < this.props.totalCols; colIdx++) {
             cols.push(
@@ -26,6 +25,7 @@ class Row extends React.Component {
     }
 
     render() {
+        console.log('rendering row')
         return (
             <div className="row">
                 {this.renderCells()}
