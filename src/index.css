@@ -1,14 +1,109 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.grid {
+    margin-left: -8px;
+    display: grid;
+    grid-template-areas:
+        "selectAll header"
+        "nav content";
+    grid-template-columns: 100px 10000px;
+    grid-template-rows: 100px;
+
+    height: 1000vh;
+    width: 1000vh;
 }
+.rows {
+    grid-area: content;
+    margin-top: -81px;
+    margin-left: -28px;
+}
+.row {
+    display: flex;
+}
+
+.header-cell-selectAll {
+    grid-area: selectAll;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+}
+
+.header-column {
+    margin-top: -81px;
+    grid-area: nav;
+    position: sticky;
+    flex-direction: column;
+    display: flex;
+    left: 0px;
+    top: 0px;
+
+}
+.header-row {
+    grid-area: header;
+    position: sticky;
+    margin-left: -28px;
+    margin-top: -8px;
+    width: 100000px;
+    top: 0;
+    left: 0;
+}
+
+.cell {
+    border: 1px solid lightgrey;
+    min-width: 73px;
+    height: 27px;
+    padding: 1px;
+}    
+.header-cell {
+    display: inline-block;
+    height: 27px;
+    border: 1px solid lightgrey;
+    width: 73px;
+    text-align: center;
+    background: azure;
+    padding: 4px;   
+    font-family: fantasy;
+}
+
+.cursor {
+    border: 2px solid blue;
+}
+
+/* 
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+} */
