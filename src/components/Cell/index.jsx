@@ -13,15 +13,16 @@ class Cell extends React.Component {
         col: PropTypes.number.isRequired,
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        const aaa = (
-            this.props.cursorLocation !== nextProps.cursorLocation &&
-            (this.isCursor(this.props.cursorLocation) || this.isCursor(nextProps.cursorLocation))
-        )
-        if (aaa) {
-            return true
-        } else { return false }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('scu')
+    //     const aaa = (
+    //         this.props.cursorLocation !== nextProps.cursorLocation &&
+    //         (this.isCursor(this.props.cursorLocation) || this.isCursor(nextProps.cursorLocation))
+    //     )
+    //     if (aaa) {
+    //         return true
+    //     } else { return false }
+    // }
     
     isCursor = (cursorLocation = this.props.cursorLocation) => {
         const {
@@ -36,7 +37,7 @@ class Cell extends React.Component {
     }
 
     getClass = () => {
-        return this.isCursor() ? 'cell cursor' : 'cell'
+        return this.props.isCursor ? 'cell cursor' : 'cell'
 
     }
 
@@ -45,21 +46,21 @@ class Cell extends React.Component {
     }
 
     render() {
-        console.log('cellrender' + this.props.col + ' ' + this.props.row);
+        // console.log('cellrender' + this.props.col + ' ' + this.props.row);
+        // console.log(new Date())
         
         return (
             <div className={this.getClass()}>
-                {this.renderCell()}
+                {/* {this.renderCell()} */}
             </div>
         )
     }
 }
 
 function mapStateToProps(state) {
-    // console.log(state.grid.cursorLocation);
     
     return {
-        cursorLocation: state.grid.cursorLocation,
+        // cursorLocation: state.grid.cursorLocation,
     }
 }
 

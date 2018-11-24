@@ -16,7 +16,7 @@ class Grid extends React.Component {
     }
 
     render() {
-        console.log('rendering grid')
+        // console.log('rendering grid')
         return (
             <div className="grid">
                 <KeyBindings/>
@@ -30,7 +30,8 @@ class Grid extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {}
+    return {
+    }
 }
 
 function mapDispatchToProps(dispatch) {

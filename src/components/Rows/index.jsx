@@ -14,10 +14,12 @@ class Rows extends React.Component {
     renderRows = () => {
         let rows = []
         for (let rowIdx = 0; rowIdx < this.props.totalRows; rowIdx++) {
+            let cursorLocation = this.props.cursorLocation[0] === rowIdx ? this.props.cursorLocation[1] : undefined
             rows.push(
                 <Row
                     key={rowIdx}
                     row={rowIdx}
+                    cursorLocation={cursorLocation}
                 />
             )
         }
@@ -25,7 +27,7 @@ class Rows extends React.Component {
     }
 
     render() {
-        console.log('rendering rows')
+        // console.log('rendering rows')
         return (
             <div className="rows">
                 {this.renderRows()}
@@ -37,6 +39,7 @@ class Rows extends React.Component {
 function mapStateToProps(state) {
     return {
         totalRows: state.grid.totalRows,
+        cursorLocation: state.grid.cursorLocation,
     }
 }
 

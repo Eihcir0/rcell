@@ -13,12 +13,12 @@ export default function grid(state = initialState, action) {
     //   return newState;
 
     case SET_CURSOR:
-      // debugger
       newState = {
         ...state,
         cursorLocation: action.location,
       }
-      console.log(newState.cursorLocation);
+      // console.log(newState.cursorLocation);
+      // console.log(new Date())
       
       return newState
     default:

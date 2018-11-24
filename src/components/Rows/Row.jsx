@@ -18,6 +18,7 @@ class Row extends React.Component {
                     key={colIdx}
                     col={colIdx}
                     row={this.props.row}
+                    isCursor={this.props.cursorLocation === colIdx}
                 />
             )
         }
@@ -25,7 +26,7 @@ class Row extends React.Component {
     }
 
     render() {
-        console.log('rendering row')
+        // console.log('rendering row')
         return (
             <div className="row">
                 {this.renderCells()}

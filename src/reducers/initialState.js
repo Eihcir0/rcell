@@ -1,5 +1,5 @@
 export default {
-  totalRows: 25,
-  totalCols: 25,
-  cursorLocation: [2,2],
+  totalRows: 30,
+  totalCols: 30,
+  cursorLocation: [0,0],
 };
