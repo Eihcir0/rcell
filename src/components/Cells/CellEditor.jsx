@@ -33,18 +33,19 @@ class CellEditor extends React.PureComponent {
         const { value } = this.state
         this.props.actions.setValue({ value, row, col }) // make it a promise here?
         this.props.actions.setEditing({ off: true })
+        this.props.handleChange()
     }
     
     handleEsc = (e) => {
         this.props.actions.setEditing({off: true})
     }
-
+    
     handleTab = (e) => {
         const { row, col, } = this.props
         const { value } = this.state
         this.props.actions.setValue({ value, row, col })
         this.props.actions.setEditing({off: true})
-        this.props.actions.setCursor(row, col + 1)
+        this.props.handleChange()
     }
     
     handleKeyPress = (e) => {

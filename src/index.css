@@ -142,13 +142,6 @@ html {
 .cursor {
     animation: mymove 5s infinite;
 }
-/* @keyframes mymove {
-    from {border: 2px solid orange;}
-    to {border: 2px solid black}
-    from {border: 2px solid white}
-    to {border: 2px solid green}
-} */
-/* } */
 @keyframes mymove {
     0% {border: 2px solid blue;}
     20% {border: 2px solid indigo;}
@@ -157,6 +150,13 @@ html {
     80% {border: 2px solid orange;}
     100% {border: 2px solid green;}
     
+}
+
+.flip {
+    animation: myflip 0.2s;
+}
+@keyframes myflip {
+    50% { transform: rotateY(-180deg)}
 }
 
 /* 

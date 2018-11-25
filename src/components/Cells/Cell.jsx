@@ -15,9 +15,29 @@ export default class Cell extends React.Component {
         col: PropTypes.number.isRequired,
     }
 
-    getClass = () => {
-        return this.props.isCursor ? 'cell cursor' : 'cell'
+    state = {
+        flip: false,
+    }
 
+    getClass = () => {
+        let className = this.props.isCursor ? 'cell cursor' : 'cell'
+        return className
+        
+    }
+    
+    getContainerClass = () => {
+        let className = 'cell-container'
+        if (this.state.flip) className += ' flip'
+        return className    
+    }
+    
+    handleChange = () => {
+        this.setState({
+            flip: true
+        })
+        setTimeout(()=>{
+            this.setState({flip: false})
+        }, 300)
     }
 
     render() {
@@ -25,16 +45,18 @@ export default class Cell extends React.Component {
         // console.log(new Date())
         const value = this.props.startingValue === undefined ? this.props.value : this.props.startingValue
         return (
-            <div className={this.getClass()}>
-                {this.props.isEditing && (
-                    <CellEditor
-                        value={value}
-                        row={this.props.row}
-                        col={this.props.col}
-                    />
-                )}
-                {!this.props.isEditing && this.props.value}
-
+            <div className={this.getContainerClass()}>
+                <div className={this.getClass()}>
+                    {this.props.isEditing && (
+                        <CellEditor
+                            value={value}
+                            row={this.props.row}
+                            col={this.props.col}
+                            handleChange={this.handleChange}
+                        />
+                    )}
+                    {!this.props.isEditing && this.props.value}
+                </div>
             </div>
         )
     }
