@@ -1,12 +1,12 @@
 import React from 'react'
 import CellEditor from './CellEditor'
-// import {bindActionCreators} from 'redux'
-// import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 
 import PropTypes from 'prop-types'
-// import * as actions from '../../actions/actions'
+import * as actions from '../../actions/actions'
 
-export default class Cell extends React.Component {
+class Cell extends React.Component {
     static propTypes = {
         actions: PropTypes.object,
         isCursor: PropTypes.bool,
@@ -40,13 +40,26 @@ export default class Cell extends React.Component {
         }, 300)
     }
 
+    handleClick = () => {
+        const { row, col, actions, isCursor } = this.props
+        if (!isCursor) actions.setCursor(row, col)
+    }
+    
+    handleDoubleClick = () => {
+        const { row, col, actions, isEditing } = this.props
+        if (!isEditing) {
+            actions.setCursor(row, col)
+            actions.setEditing({ row, col })
+        }
+    }
+
     render() {
         // console.log('cellrender' + this.props.col + ' ' + this.props.row);
         // console.log(new Date())
         const value = this.props.startingValue === undefined ? this.props.value : this.props.startingValue
         return (
             <div className={this.getContainerClass()}>
-                <div className={this.getClass()}>
+                <div className={this.getClass()} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick}>
                     {this.props.isEditing && (
                         <CellEditor
                             value={value}
@@ -69,13 +82,13 @@ export default class Cell extends React.Component {
 //     }
 // }
 
-// function mapDispatchToProps(dispatch) {
-//     return {
-//        actions: bindActionCreators(actions, dispatch)
-//     }
-// }
+function mapDispatchToProps(dispatch) {
+    return {
+       actions: bindActionCreators(actions, dispatch)
+    }
+}
 
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps,
-// )(Cell)
+export default connect(
+    null,
+    mapDispatchToProps,
+)(Cell)
