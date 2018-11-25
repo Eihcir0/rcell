@@ -59,7 +59,7 @@ html {
 
 .cell {
     border: 1px solid lightgrey;
-    min-width: 73px;
+    width: 73px;
     height: 27px;
     padding: 1px;
 }    

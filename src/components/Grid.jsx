@@ -6,8 +6,8 @@ import React from 'react'
 
 import HeaderRow from './Rows/HeaderRow'
 import HeaderColumn from './HeaderColumn'
-import HeaderCell from './Cell/HeaderCell'
-import Rows from './Rows'
+import HeaderCell from './Cells/HeaderCell'
+import Rows from './Rows/Rows'
 import KeyBindings from './KeyBindings'
 
 class Grid extends React.Component {

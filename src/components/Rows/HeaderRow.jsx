@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import HeaderCell from '../Cell/HeaderCell'
+import HeaderCell from '../Cells/HeaderCell'
 
 class HeaderRow extends React.Component {
     static propTypes = {

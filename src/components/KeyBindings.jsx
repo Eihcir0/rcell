@@ -15,7 +15,10 @@ class KeyBindings extends React.Component {
     }
 
     keydown = (e) => {
-        // if (this.state.editingPosition) return
+        // console.log(e.keyCode)
+        // console.log(this.props.editingLocation);
+        
+        if (this.props.editingLocation && this.props.editingLocation.length) return
         switch (e.keyCode) {
             case 37:
                 e.preventDefault()
@@ -33,24 +36,28 @@ class KeyBindings extends React.Component {
                 e.preventDefault()
                 this.moveCursor(0, 1)
                 break;
-            // case 13:
-            //     e.preventDefault()
-            //     console.log('here')
-            //     this.setState((prevState) => {
-            //         return (
-            //             { editingPosition: prevState.cursorPosition }
-            //         )
-            //     })
-            //     break;
+            case 13:
+                e.preventDefault()
+                this.enterEdit()
+                // this.setState((prevState) => {
+                //     return (
+                //         { editingLocation: prevState.cursorPosition }
+                //     )
+                // })
+                break;
             default:
                 break;
         }
     }
 
+    enterEdit = () => {
+        // console.log('here')
+        this.props.actions.setEditing(this.props.cursorLocation)
+    }
     moveCursor = (col, row) => {
         const { cursorLocation, actions } = this.props
         const newLocation = [row + cursorLocation[0], col + cursorLocation[1]]
-        actions.setCursor(newLocation)
+        actions.setCursor(...newLocation)
 
     }
 
@@ -62,6 +69,7 @@ class KeyBindings extends React.Component {
 function mapStateToProps(state) {
     return {
         cursorLocation: state.grid.cursorLocation,
+        editingLocation: state.grid.editingLocation,
     }
 }
 

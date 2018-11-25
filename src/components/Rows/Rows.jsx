@@ -9,17 +9,26 @@ class Rows extends React.Component {
     static propTypes = {
         actions: PropTypes.object,
         totalRows: PropTypes.number.isRequired,
+        cursorLocation: PropTypes.array,
+        editingLocation: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.bool,
+        ]),
+        values: PropTypes.array,
     }
 
     renderRows = () => {
-        let rows = []
+        const rows = []
         for (let rowIdx = 0; rowIdx < this.props.totalRows; rowIdx++) {
-            let cursorLocation = this.props.cursorLocation[0] === rowIdx ? this.props.cursorLocation[1] : undefined
+            const cursorLocation = this.props.cursorLocation[0] === rowIdx ? this.props.cursorLocation[1] : undefined
+            const editingLocation = this.props.editingLocation && this.props.editingLocation.length && this.props.editingLocation[0] === rowIdx ? this.props.editingLocation[1] : undefined
             rows.push(
                 <Row
                     key={rowIdx}
                     row={rowIdx}
                     cursorLocation={cursorLocation}
+                    editingLocation={editingLocation}
+                    values={this.props.values[rowIdx]}
                 />
             )
         }
@@ -37,9 +46,13 @@ class Rows extends React.Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state);
+    
     return {
         totalRows: state.grid.totalRows,
         cursorLocation: state.grid.cursorLocation,
+        editingLocation: state.grid.editingLocation,
+        values: state.grid.values,
     }
 }
 
