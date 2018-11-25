@@ -62,7 +62,14 @@ html {
     width: 73px;
     height: 27px;
     padding: 1px;
-}    
+    font-family: system-ui;
+    font-size: 12px;
+}
+
+.cell-editor-input {
+    font-family: system-ui;
+    font-size: 12px;
+}
 .header-cell {
     display: inline-block;
     height: 27px;

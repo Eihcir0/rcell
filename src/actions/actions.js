@@ -2,18 +2,23 @@ import {
     SET_CURSOR, 
     SET_EDITING,
     SET_VALUE,
+    RESET_STARTING_VALUE,
 } from './constants'
 
 export const setCursor = (row, col) => {
     return { type: SET_CURSOR, row, col, }
 }
 
-export const setEditing = (value) => {
-    return { type: SET_EDITING, location: value }
+export const setEditing = ({row, col, value, off}) => {
+    return { type: SET_EDITING, row, col, value, off }
 }
 
 export const setValue = ({value, row, col}) => {
     return { type: SET_VALUE, row, col, value }
+}
+
+export const resetStartingValue = () => {
+    return { type: RESET_STARTING_VALUE, }
 }
 
 

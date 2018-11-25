@@ -29,6 +29,7 @@ class Rows extends React.Component {
                     cursorLocation={cursorLocation}
                     editingLocation={editingLocation}
                     values={this.props.values[rowIdx]}
+                    startingValue={editingLocation && this.props.startingValue}
                 />
             )
         }
@@ -52,6 +53,7 @@ function mapStateToProps(state) {
         totalRows: state.grid.totalRows,
         cursorLocation: state.grid.cursorLocation,
         editingLocation: state.grid.editingLocation,
+        startingValue: state.grid.startingValue,
         values: state.grid.values,
     }
 }

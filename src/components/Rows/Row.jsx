@@ -14,14 +14,15 @@ class Row extends React.Component {
     renderCells = () => {
         let cols = []
         for (let colIdx = 0; colIdx < this.props.totalCols; colIdx++) {
-
+            let isEditing = this.props.editingLocation === colIdx
             cols.push(
                 <Cell
                     key={colIdx}
                     col={colIdx}
                     row={this.props.row}
                     isCursor={this.props.cursorLocation === colIdx}
-                    isEditing={this.props.editingLocation === colIdx}
+                    isEditing={isEditing}
+                    startingValue={isEditing && this.props.startingValue}
                     value={this.props.values[colIdx] || ''}
                 />
             )

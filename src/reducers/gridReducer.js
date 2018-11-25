@@ -3,6 +3,7 @@ import {
   SET_CURSOR,
   SET_EDITING,
   SET_VALUE,
+  RESET_STARTING_VALUE,
 } from '../actions/constants';
 
 export default function grid(state = initialState, action) {
@@ -13,7 +14,8 @@ export default function grid(state = initialState, action) {
     case SET_EDITING:
       newState = {
         ...state,
-        editingLocation: action.location,
+        editingLocation: action.off ? false : [action.row, action.col],
+        startingValue: action.value,
       }
       return newState
     
@@ -23,13 +25,20 @@ export default function grid(state = initialState, action) {
         cursorLocation: [action.row, action.col],
       }
       return newState
-      
+
     case SET_VALUE:
       const newValues = [...state.values]
       newValues[action.row][action.col] = action.value
       newState = {
         ...state,
         values: newValues,
+      }
+      return newState
+      
+    case RESET_STARTING_VALUE:
+      newState = {
+        ...state,
+        startingValue: undefined,
       }
       return newState
       

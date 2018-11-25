@@ -23,12 +23,12 @@ export default class Cell extends React.Component {
     render() {
         // console.log('cellrender' + this.props.col + ' ' + this.props.row);
         // console.log(new Date())
-        
+        const value = this.props.startingValue === undefined ? this.props.value : this.props.startingValue
         return (
             <div className={this.getClass()}>
                 {this.props.isEditing && (
                     <CellEditor
-                        value={this.props.value}
+                        value={value}
                         row={this.props.row}
                         col={this.props.col}
                     />
