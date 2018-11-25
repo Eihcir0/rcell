@@ -140,7 +140,23 @@ html {
     background-image: linear-gradient(to bottom,#ee82ee85, #61242491);
 }
 .cursor {
-    border: 2px solid blue;
+    animation: mymove 5s infinite;
+}
+/* @keyframes mymove {
+    from {border: 2px solid orange;}
+    to {border: 2px solid black}
+    from {border: 2px solid white}
+    to {border: 2px solid green}
+} */
+/* } */
+@keyframes mymove {
+    0% {border: 2px solid blue;}
+    20% {border: 2px solid indigo;}
+    40% {border: 2px solid violet;}
+    60% {border: 2px solid red;}
+    80% {border: 2px solid orange;}
+    100% {border: 2px solid green;}
+    
 }
 
 /* 
