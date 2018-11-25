@@ -35,6 +35,9 @@ html {
     position: fixed;
     z-index: 1000;
     top: 0;
+    background-image: linear-gradient(135deg,black, grey, white,  #61242491,  #61242491) !important;
+
+    /* background-image: linear-gradient(-45deg,red,orange,yellow,green,blue,indigo,violet) !important; */
 }
 
 .header-column {
@@ -64,11 +67,15 @@ html {
     padding: 1px;
     font-family: system-ui;
     font-size: 12px;
+    background: #f0808017;
 }
 
 .cell-editor-input {
     font-family: system-ui;
     font-size: 12px;
+    border: 0;
+    outline: none;
+    width: -webkit-fill-available;
 }
 .header-cell {
     display: inline-block;
@@ -78,9 +85,60 @@ html {
     text-align: center;
     background: azure;
     padding: 4px;   
-    font-family: fantasy;
+    font-family: system-ui;
+    color: black;
+    text-shadow: 1px;
 }
 
+
+.color0col {
+    background-image: linear-gradient(to right, #61242491, #ff000066);
+}
+.color1col {
+    background-image: linear-gradient(to right,#ff000066,#ffa5008a);
+}
+.color2col {
+    background-image: linear-gradient(to right,#ffa5008a,#ffff0091);
+}
+.color3col {
+    background-image: linear-gradient(to right,#ffff0091,#0080006e);
+}
+.color4col {
+    background-image: linear-gradient(to right,#0080006e,#0000ff85);
+}
+.color5col {
+    background-image: linear-gradient(to right,#0000ff85,#4b00827d);
+}
+.color6col {
+    background-image: linear-gradient(to right,#4b00827d,#ee82ee85);
+}
+.color7col {
+    background-image: linear-gradient(to right,#ee82ee85, #61242491);
+}
+.color0row {
+    background-image: linear-gradient(to bottom, #61242491, #ff000066);
+}
+.color1row {
+    background-image: linear-gradient(to bottom,#ff000066,#ffa5008a);
+}
+.color2row {
+    background-image: linear-gradient(to bottom,#ffa5008a,#ffff0091);
+}
+.color3row {
+    background-image: linear-gradient(to bottom,#ffff0091,#0080006e);
+}
+.color4row {
+    background-image: linear-gradient(to bottom,#0080006e,#0000ff85);
+}
+.color5row {
+    background-image: linear-gradient(to bottom,#0000ff85,#4b00827d);
+}
+.color6row {
+    background-image: linear-gradient(to bottom,#4b00827d,#ee82ee85);
+}
+.color7row {
+    background-image: linear-gradient(to bottom,#ee82ee85, #61242491);
+}
 .cursor {
     border: 2px solid blue;
 }

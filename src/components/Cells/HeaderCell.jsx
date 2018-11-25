@@ -36,10 +36,18 @@ export default class HeaderCell extends React.Component {
         }
     }
 
+    getClass = () => {
+        let className = `header-cell header-cell-${this.props.type}`
+        const value = this.props.type === 'col' ? this.props.col : this.props.row
+        className += ` color${value % 8}${this.props.type}`
+        return className
+
+    }
+
     render() {
         console.log('rendering headerCell')
         return (
-            <div className={`header-cell header-cell-${this.props.type}`}>
+            <div className={this.getClass()}>
                 {this.renderLabel()}
             </div>
         )
