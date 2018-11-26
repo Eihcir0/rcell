@@ -37,7 +37,7 @@ class Cell extends React.Component {
         })
         setTimeout(()=>{
             this.setState({flip: false})
-        }, 100)
+        }, 1000)
     }
 
     handleClick = () => {
@@ -67,7 +67,13 @@ class Cell extends React.Component {
                             handleChange={this.handleChange}
                         />
                     )}
-                    {!this.props.isEditing && this.props.displayValue}
+                        {
+                            !this.props.isEditing && (
+                                <div className="cell-display">
+                                    {this.props.displayValue}
+                                </div>
+                            )
+                        }
                 </div>
             </div>
         )

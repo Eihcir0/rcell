@@ -28,6 +28,8 @@ html {
 }
 .row {
     display: flex;
+    /* background: #f0808017; */
+
 }
 
 .header-cell-selectAll {
@@ -68,15 +70,23 @@ html {
     padding: 1px;
     font-family: system-ui;
     font-size: 12px;
-    background: #f0808017;
+    /* background: #f0808017; */
+    z-index: 10;
+}
+.cell-display {
+    width: max-content;
+    overflow: scroll;
+    background:white;
 }
 
 .cell-editor-input {
     font-family: system-ui;
+    background:white;
     font-size: 12px;
     border: 0;
     outline: none;
-    width: -webkit-fill-available;
+    width: max-content;
+    height: -webkit-fill-available;
 }
 .header-cell {
     display: inline-block;
@@ -153,10 +163,10 @@ html {
 }
 
 .flip {
-    animation: myflip 0.2s;
+    animation: myflip 0.4s;
 }
 @keyframes myflip {
-    50% { transform: rotateY(-180deg)}
+    50% { transform: rotateX(-180deg)}
 }
 
 /* 
