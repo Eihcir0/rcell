@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Row from './Row'
+// import { edit } from 'external-editor';
 
 
 class Rows extends React.Component {
@@ -17,11 +18,20 @@ class Rows extends React.Component {
         values: PropTypes.array,
     }
 
+    isEditing = (rowIdx) => {
+        return this.props.editingLocation && this.props.editingLocation.length && this.props.editingLocation[0] === rowIdx
+    }
+
     renderRows = () => {
         const rows = []
         for (let rowIdx = 0; rowIdx < this.props.totalRows; rowIdx++) {
             const cursorLocation = this.props.cursorLocation[0] === rowIdx ? this.props.cursorLocation[1] : undefined
-            const editingLocation = this.props.editingLocation && this.props.editingLocation.length && this.props.editingLocation[0] === rowIdx ? this.props.editingLocation[1] : undefined
+            let editingLocation
+            let cellEditorStartingValue
+            if (this.isEditing(rowIdx)) {
+                editingLocation = this.props.editingLocation[1]
+                cellEditorStartingValue = this.props.cellEditorStartingValue
+            }
             rows.push(
                 <Row
                     key={rowIdx}
@@ -29,7 +39,7 @@ class Rows extends React.Component {
                     cursorLocation={cursorLocation}
                     editingLocation={editingLocation}
                     values={this.props.values[rowIdx]}
-                    startingValue={this.props.startingValue}
+                    cellEditorStartingValue={cellEditorStartingValue}
                 />
             )
         }
@@ -51,7 +61,7 @@ function mapStateToProps(state) {
         totalRows: state.grid.totalRows,
         cursorLocation: state.grid.cursorLocation,
         editingLocation: state.grid.editingLocation,
-        startingValue: state.grid.startingValue,
+        cellEditorStartingValue: state.grid.cellEditorStartingValue,
         values: state.grid.values,
     }
 }

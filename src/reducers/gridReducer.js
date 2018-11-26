@@ -66,7 +66,13 @@ const parseAndEvaluate = ({ action, state }) => {
     }
     if (action.value !==undefined && isFormula(action.value)) {
       const withCellValues = parseCellValues({ value: removeLeadingEquals(action.value), grid: state.values})
-      const calculatedValue = eval(withCellValues)
+      let calculatedValue
+      try {
+        calculatedValue = eval(withCellValues)
+      }
+      catch(err) {
+        calculatedValue = '!!ERROR'
+      }
       newValues[action.row][action.col].enteredValue = action.value
       newValues[action.row][action.col].displayValue = calculatedValue
       newValues[action.row][action.col].calculatedValue = calculatedValue
@@ -90,7 +96,7 @@ export default function grid(state = initialState, action) {
       newState = {
         ...state,
         editingLocation: action.off ? false : [action.row, action.col],
-        startingValue: action.value,
+        cellEditorStartingValue: action.value,
       }
       return newState
     
@@ -107,7 +113,7 @@ export default function grid(state = initialState, action) {
     case RESET_STARTING_VALUE:
       newState = {
         ...state,
-        startingValue: undefined,
+        cellEditorStartingValue: undefined,
       }
       return newState
       

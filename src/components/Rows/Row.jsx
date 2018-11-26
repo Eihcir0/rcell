@@ -15,6 +15,7 @@ class Row extends React.Component {
         let cols = []
         for (let colIdx = 0; colIdx < this.props.totalCols; colIdx++) {
             let isEditing = this.props.editingLocation === colIdx
+            const cellEditorStartingValue = isEditing ? this.props.cellEditorStartingValue : undefined
             cols.push(
                 <Cell
                     key={colIdx}
@@ -22,7 +23,7 @@ class Row extends React.Component {
                     row={this.props.row}
                     isCursor={this.props.cursorLocation === colIdx}
                     isEditing={isEditing}
-                    startingValue={this.props.startingValue}
+                    cellEditorStartingValue={cellEditorStartingValue}
                     displayValue={this.props.values[colIdx].displayValue}
                     enteredValue={this.props.values[colIdx].enteredValue}
                 />

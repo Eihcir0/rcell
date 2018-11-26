@@ -54,7 +54,7 @@ class Cell extends React.Component {
     }
 
     render() {
-        const editorValue = [undefined].includes(this.props.startingValue) ? this.props.enteredValue : this.props.startingValue
+        const editorValue = [undefined].includes(this.props.cellEditorStartingValue) ? this.props.enteredValue : this.props.cellEditorStartingValue
 
         return (
             <div className={this.getContainerClass()} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick}>
