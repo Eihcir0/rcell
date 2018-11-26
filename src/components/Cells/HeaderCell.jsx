@@ -9,7 +9,6 @@ const getColLabel = (num) => {
     if (num <= 25) return ABCS[(num + 1)]
     const base26 = `${parseInt(String(num)).toString(26)}`.split('')
     base26[0] -= 1
-    console.log(base26)
     const letters = []
     for (let number of base26) {
         letters.push(ABCS[(parseInt(number, 26) + 1)])
@@ -45,7 +44,6 @@ export default class HeaderCell extends React.Component {
     }
 
     render() {
-        console.log('rendering headerCell')
         return (
             <div className={this.getClass()}>
                 {this.renderLabel()}

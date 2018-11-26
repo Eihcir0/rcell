@@ -22,8 +22,9 @@ class Row extends React.Component {
                     row={this.props.row}
                     isCursor={this.props.cursorLocation === colIdx}
                     isEditing={isEditing}
-                    startingValue={isEditing && this.props.startingValue}
-                    value={this.props.values[colIdx] || ''}
+                    startingValue={this.props.startingValue}
+                    displayValue={this.props.values[colIdx].displayValue}
+                    enteredValue={this.props.values[colIdx].enteredValue}
                 />
             )
         }
@@ -31,7 +32,6 @@ class Row extends React.Component {
     }
 
     render() {
-        // console.log('rendering row')
         return (
             <div className="row">
                 {this.renderCells()}

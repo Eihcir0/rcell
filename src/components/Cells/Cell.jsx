@@ -37,7 +37,7 @@ class Cell extends React.Component {
         })
         setTimeout(()=>{
             this.setState({flip: false})
-        }, 300)
+        }, 100)
     }
 
     handleClick = () => {
@@ -54,21 +54,20 @@ class Cell extends React.Component {
     }
 
     render() {
-        // console.log('cellrender' + this.props.col + ' ' + this.props.row);
-        // console.log(new Date())
-        const value = this.props.startingValue === undefined ? this.props.value : this.props.startingValue
+        const editorValue = [undefined].includes(this.props.startingValue) ? this.props.enteredValue : this.props.startingValue
+
         return (
-            <div className={this.getContainerClass()}>
-                <div className={this.getClass()} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick}>
+            <div className={this.getContainerClass()} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick}>
+                <div className={this.getClass()}>
                     {this.props.isEditing && (
                         <CellEditor
-                            value={value}
+                            value={editorValue}
                             row={this.props.row}
                             col={this.props.col}
                             handleChange={this.handleChange}
                         />
                     )}
-                    {!this.props.isEditing && this.props.value}
+                    {!this.props.isEditing && this.props.displayValue}
                 </div>
             </div>
         )

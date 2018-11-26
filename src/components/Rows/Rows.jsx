@@ -29,7 +29,7 @@ class Rows extends React.Component {
                     cursorLocation={cursorLocation}
                     editingLocation={editingLocation}
                     values={this.props.values[rowIdx]}
-                    startingValue={editingLocation && this.props.startingValue}
+                    startingValue={this.props.startingValue}
                 />
             )
         }
@@ -37,7 +37,6 @@ class Rows extends React.Component {
     }
 
     render() {
-        // console.log('rendering rows')
         return (
             <div className="rows">
                 {this.renderRows()}
@@ -47,7 +46,6 @@ class Rows extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state);
     
     return {
         totalRows: state.grid.totalRows,

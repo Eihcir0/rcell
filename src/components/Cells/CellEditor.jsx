@@ -23,7 +23,6 @@ class CellEditor extends React.PureComponent {
     }
 
     handleChange =  (e) => {
-        console.log('handlechange', e.target.value)
         this.cursor = e.target.selectionStart;
         this.setState({ value: e.target.value });
     }
@@ -49,10 +48,6 @@ class CellEditor extends React.PureComponent {
     }
     
     handleKeyPress = (e) => {
-        console.log('handling keypress')
-        console.log('charcode', e.charCode)
-        console.log('keycode', e.keyCode)
-        console.log('key', e.key)
         switch (e.charCode) {
             case 13:
             e.preventDefault()
@@ -66,10 +61,6 @@ class CellEditor extends React.PureComponent {
     
     handleKeyDown = (e) => {
         //change to using descriptive `key` not keycode
-        console.log('handling keydown')
-        console.log('charcode', e.charCode)
-        console.log('keycode', e.keyCode)
-        console.log('key', e.key)
         switch (e.key) {
             case 'Tab':
             e.preventDefault()
@@ -92,8 +83,6 @@ class CellEditor extends React.PureComponent {
     }
 
     render() {
-        // console.log('cellrender' + this.props.col + ' ' + this.props.row);
-        // console.log(new Date())
         
         return (
             <div className={this.getClass()}>

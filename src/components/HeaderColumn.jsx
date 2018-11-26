@@ -28,7 +28,6 @@ class HeaderColumn extends React.Component {
 
 
     render() {
-        console.log('rendering header column')
         return (
             <div className="header-column">
                 {this.renderHeaderCells()}

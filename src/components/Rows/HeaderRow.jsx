@@ -25,7 +25,6 @@ class HeaderRow extends React.Component {
     }
 
     render() {
-        // console.log('rendering headerrow')
         return (
             <div className="header-row">
                 {this.renderHeaderCells()}

@@ -144,10 +144,9 @@ html {
 }
 @keyframes mymove {
     0% {border: 2px solid blue;}
-    20% {border: 2px solid indigo;}
-    40% {border: 2px solid violet;}
-    60% {border: 2px solid red;}
-    80% {border: 2px solid orange;}
+    25% {border: 2px solid indigo;}
+    50% {border: 2px solid violet;}
+    75% {border: 2px solid orange;}
     100% {border: 2px solid green;}
     
 }

@@ -16,7 +16,6 @@ class Grid extends React.Component {
     }
 
     render() {
-        // console.log('rendering grid')
         return (
             <div className="grid">
                 <KeyBindings/>

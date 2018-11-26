@@ -15,9 +15,6 @@ class KeyBindings extends React.Component {
     }
 
     keydown = (e) => {
-        console.log(e.keyCode)
-        // console.log(this.props.editingLocation);
-        
         if (this.props.editingLocation && this.props.editingLocation.length) return
         switch (e.keyCode) {
             case 37:
@@ -58,7 +55,6 @@ class KeyBindings extends React.Component {
     }
 
     enterEdit = (value=undefined) => {
-        // console.log('here')
         this.props.actions.setEditing({
             row: this.props.cursorLocation[0],
             col: this.props.cursorLocation[1],
