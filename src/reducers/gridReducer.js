@@ -110,6 +110,7 @@ export default function grid(state = initialState, action) {
     case SET_VALUE:
       newState = parseAndEvaluate({ action, state })
       sessionStorage.setItem('rcell', JSON.stringify(newState))
+      localStorage.setItem('rcell', JSON.stringify(newState))
       return newState
       
     case RESET_STARTING_VALUE:

@@ -35,7 +35,7 @@ const getStartingGridValues = (totalCols, totalRows) => {
   values: getStartingGridValues(totalCols, totalRows),
 }
 
-const storedState = sessionStorage.getItem('rcell')
-const initialState = storedState ? JSON.parse(storedState) : blankState
+const localState = localStorage.getItem('rcell')
+const initialState = localState ? JSON.parse(localState) : blankState
 
 export default initialState

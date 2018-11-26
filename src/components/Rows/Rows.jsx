@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Row from './Row'
-// import { edit } from 'external-editor';
 
 
 class Rows extends React.Component {
