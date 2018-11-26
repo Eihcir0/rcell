@@ -22,16 +22,31 @@ class Rows extends React.Component {
         return this.props.editingLocation && this.props.editingLocation.length && this.props.editingLocation[0] === rowIdx
     }
 
+    getRowProps = (rowIdx) => {
+        const cursorLocation = this.props.cursorLocation[0] === rowIdx ? this.props.cursorLocation[1] : undefined
+        let editingLocation
+        let cellEditorStartingValue
+        if (this.isEditing(rowIdx)) {
+            editingLocation = this.props.editingLocation[1]
+            cellEditorStartingValue = this.props.cellEditorStartingValue
+        }
+        return {
+            cursorLocation,
+            editingLocation,
+            cellEditorStartingValue,
+        }
+    }
+
     renderRows = () => {
         const rows = []
         for (let rowIdx = 0; rowIdx < this.props.totalRows; rowIdx++) {
-            const cursorLocation = this.props.cursorLocation[0] === rowIdx ? this.props.cursorLocation[1] : undefined
-            let editingLocation
-            let cellEditorStartingValue
-            if (this.isEditing(rowIdx)) {
-                editingLocation = this.props.editingLocation[1]
-                cellEditorStartingValue = this.props.cellEditorStartingValue
-            }
+            
+            const {
+                cursorLocation,
+                editingLocation,
+                cellEditorStartingValue,
+            } = this.getRowProps(rowIdx)
+
             rows.push(
                 <Row
                     key={rowIdx}
