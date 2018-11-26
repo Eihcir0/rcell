@@ -27,12 +27,15 @@ const getStartingGridValues = (totalCols, totalRows) => {
 }
 
 
- const initialState = {
+ const blankState = {
   totalRows,
   totalCols,
   cursorLocation: [0,0],
   editingLocation: false,
   values: getStartingGridValues(totalCols, totalRows),
 }
+
+const storedState = sessionStorage.getItem('rcell')
+const initialState = storedState ? JSON.parse(storedState) : blankState
 
 export default initialState
