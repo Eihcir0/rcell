@@ -1,9 +1,11 @@
+/* eslint no-eval: 0 */
 import initialState from './initialState';
 import { 
   SET_CURSOR,
   SET_EDITING,
   SET_VALUE,
   RESET_STARTING_VALUE,
+  TOGGLE_SHIFT_GRID,
 } from '../actions/constants';
 
 const CELL_REFERENCE_REGEX = /[a-zA-Z]+[0-9]+/ //number and a letter adjacent i.e. C3, AE111, etc.
@@ -109,8 +111,14 @@ export default function grid(state = initialState, action) {
 
     case SET_VALUE:
       newState = parseAndEvaluate({ action, state })
-      sessionStorage.setItem('rcell', JSON.stringify(newState))
       localStorage.setItem('rcell', JSON.stringify(newState))
+      return newState
+      
+    case TOGGLE_SHIFT_GRID:
+      newState = {
+        ...state,
+        gridShifted: !state.gridShifted,
+      }
       return newState
       
     case RESET_STARTING_VALUE:
@@ -125,10 +133,3 @@ export default function grid(state = initialState, action) {
     return state;
   }
 }
-
-
-    // case FETCH_STUFF:
-    //   return action;
-    // case RECEIVE_STUFF:
-    //   newState = action.stuff;
-    //   return newState;

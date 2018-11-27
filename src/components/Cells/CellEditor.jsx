@@ -30,8 +30,8 @@ class CellEditor extends React.PureComponent {
     handleEnter = ()=> {
         const { row, col, } = this.props
         const { value } = this.state
-        this.props.actions.setValue({ value, row, col }) // make it a promise here?
         this.props.actions.setEditing({ off: true })
+        this.props.actions.setValue({ value, row, col }) // make it a promise here?
         this.props.handleChange()
     }
     

@@ -1,5 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import * as actions from '../../actions/actions'
 
 
 const ABCS = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
@@ -16,7 +20,7 @@ const getColLabel = (num) => {
     return letters.join('')
 }
 
-export default class HeaderCell extends React.Component {
+class HeaderCell extends React.Component {
     static propTypes = {
         actions: PropTypes.object,
         row: PropTypes.number,
@@ -31,7 +35,15 @@ export default class HeaderCell extends React.Component {
         } else if (type === 'row') {
             return row + 1
         } else if (type === 'selectAll') {
-            return null
+            const { actions, gridShifted } = this.props
+            return (
+                <button
+                    className="grid-shift-button"
+                    onClick={actions.toggleShiftGrid}
+                >
+                    {gridShifted ? 'unshift' : 'shift'}
+                </button>
+            )
         }
     }
 
@@ -51,3 +63,20 @@ export default class HeaderCell extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        gridShifted: state.grid.gridShifted,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch),
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HeaderCell)  // Instead of making all header cells have to connect, can I make a SelectAll cell which extends HeaderCell?

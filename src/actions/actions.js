@@ -3,6 +3,7 @@ import {
     SET_EDITING,
     SET_VALUE,
     RESET_STARTING_VALUE,
+    TOGGLE_SHIFT_GRID,
 } from './constants'
 
 export const setCursor = (row, col) => {
@@ -21,6 +22,9 @@ export const resetStartingValue = () => {
     return { type: RESET_STARTING_VALUE, }
 }
 
+export const toggleShiftGrid = () => {
+    return { type: TOGGLE_SHIFT_GRID, }
+}
 
 // import * as constants from './constants';
 // export function receiveStuff(data) {

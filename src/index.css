@@ -16,18 +16,23 @@ html {
         "selectAll header"
         "nav content";
     grid-template-columns: 100px 10000px;
-    grid-template-rows: 100px;
+    grid-template-rows: 20px;
 
     height: 1000vh;
     width: 1000vh;
 }
 .rows {
     grid-area: content;
-    margin-top: -81px;
-    margin-left: -28px;
 }
 .row {
     display: flex;
+    /* background: #f0808017; */
+
+}
+
+.row-shifted {
+    display: flex;
+    margin-left: 50px;
     /* background: #f0808017; */
 
 }
@@ -42,8 +47,16 @@ html {
     /* background-image: linear-gradient(-45deg,red,orange,yellow,green,blue,indigo,violet) !important; */
 }
 
+.grid-shift-button {
+    font-family: cursive;
+    background: 0;
+    padding: 0px;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+}
+
 .header-column {
-    margin-top: -81px;
     grid-area: nav;
     position: sticky;
     flex-direction: column;
@@ -52,20 +65,19 @@ html {
     top: 0px;
 
 }
+
 .header-row {
     grid-area: header;
     position: sticky;
-    margin-left: -28px;
     margin-top: -8px;
     width: 100000px;
     top: 0;
     left: 0;
-    z-index: -10;
 }
 
 .cell {
     border: 1px solid lightgrey;
-    width: 73px;
+    width: 100px;
     height: 27px;
     padding: 1px;
     font-family: system-ui;
@@ -86,13 +98,13 @@ html {
     border: 0;
     outline: none;
     width: max-content;
-    height: -webkit-fill-available;
+    height: -webkit-fill-available; 
 }
 .header-cell {
     display: inline-block;
     height: 27px;
     border: 1px solid lightgrey;
-    width: 73px;
+    width: 100px;
     text-align: center;
     background: azure;
     padding: 4px;   
@@ -166,7 +178,7 @@ html {
     animation: myflip 0.4s;
 }
 @keyframes myflip {
-    50% { transform: rotateX(-180deg)}
+    50% { transform: rotateY(-180deg)}
 }
 
 /* 

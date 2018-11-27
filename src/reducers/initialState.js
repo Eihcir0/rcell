@@ -33,6 +33,7 @@ const getStartingGridValues = (totalCols, totalRows) => {
   cursorLocation: [0,0],
   editingLocation: false,
   values: getStartingGridValues(totalCols, totalRows),
+  gridShifted: false,
 }
 
 const localState = localStorage.getItem('rcell')
