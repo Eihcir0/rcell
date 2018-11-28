@@ -35,7 +35,7 @@ class Row extends React.Component {
     render() {
         const shift = this.props.gridShifted && this.props.row % 2 !== 0 
         return (
-            <div className={`row${shift ? '-shifted' : ''}`}>
+            <div className={`row${shift ? ' row-shifted' : ''}`}>
                 {this.renderCells()}
             </div>
         )

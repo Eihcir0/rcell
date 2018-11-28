@@ -18,6 +18,7 @@ class HeaderRow extends React.Component {
                     type={'col'}
                     key={colIdx}
                     col={colIdx}
+                    isCursor={colIdx === this.props.cursorLocation[1]}
                 />
             )
         }
@@ -36,6 +37,7 @@ class HeaderRow extends React.Component {
 function mapStateToProps(state) {
     return {
         totalCols: state.grid.totalCols,
+        cursorLocation: state.grid.cursorLocation,
     }
 }
 

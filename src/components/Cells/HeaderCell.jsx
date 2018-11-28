@@ -34,23 +34,16 @@ class HeaderCell extends React.Component {
             return getColLabel(col)
         } else if (type === 'row') {
             return row + 1
-        } else if (type === 'selectAll') {
-            const { actions, gridShifted } = this.props
-            return (
-                <button
-                    className="grid-shift-button"
-                    onClick={actions.toggleShiftGrid}
-                >
-                    {gridShifted ? 'unshift' : 'shift'}
-                </button>
-            )
         }
     }
 
     getClass = () => {
-        let className = `header-cell header-cell-${this.props.type}`
+        let className = `header-cell ${this.props.type}`
         const value = this.props.type === 'col' ? this.props.col : this.props.row
         className += ` color${value % 8}${this.props.type}`
+        if (this.props.isCursor) {
+            className += ' header-cursor'
+        }
         return className
 
     }

@@ -6,7 +6,7 @@ import React from 'react'
 
 import HeaderRow from './Rows/HeaderRow'
 import HeaderColumn from './HeaderColumn'
-import HeaderCell from './Cells/HeaderCell'
+import HeaderCorner from './Cells/HeaderCorner'
 import Rows from './Rows/Rows'
 import KeyBindings from './KeyBindings'
 
@@ -19,7 +19,7 @@ class Grid extends React.Component {
         return (
             <div className="grid">
                 <KeyBindings/>
-                <HeaderCell type="selectAll"/>
+                <HeaderCorner/>
                 <HeaderRow/>
                 <HeaderColumn/>
                 <Rows/>

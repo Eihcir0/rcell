@@ -9,51 +9,49 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  margin: 0;
+  overscroll-behavior: none;
+}
+
 .grid {
-    margin-left: -8px;
     display: grid;
     grid-template-areas:
         "selectAll header"
         "nav content";
     grid-template-columns: 100px 10000px;
-    grid-template-rows: 20px;
-
+    grid-template-rows: 19px;
+    margin-top: 5.5rem;
     height: 1000vh;
     width: 1000vh;
+    background-color: lightgoldenrodyellow;
 }
 .rows {
     grid-area: content;
+    margin-top: 0.5rem;
 }
 .row {
     display: flex;
+    background-color: white;
     /* background: #f0808017; */
-
+    
 }
 
-.row-shifted {
-    display: flex;
+.row.row-shifted {
     margin-left: 50px;
-    /* background: #f0808017; */
 
-}
-
-.header-cell-selectAll {
-    grid-area: selectAll;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    background-image: linear-gradient(135deg,black, grey, white,  #61242491,  #61242491) !important;
-
-    /* background-image: linear-gradient(-45deg,red,orange,yellow,green,blue,indigo,violet) !important; */
 }
 
 .grid-shift-button {
     font-family: cursive;
-    background: 0;
-    padding: 0px;
+    background: silver;
+    padding: 3px;
     border: 0;
     cursor: pointer;
     outline: none;
+    margin: 3px;
+    border-radius: 3px; 
+    margin-left: 2rem;
 }
 
 .header-column {
@@ -63,17 +61,16 @@ html {
     display: flex;
     left: 0px;
     top: 0px;
+    margin-top: 0.5rem;
 
 }
 
 .header-row {
     grid-area: header;
-    position: sticky;
-    margin-top: -8px;
+    position: fixed;
     width: 100000px;
-    top: 0;
-    left: 0;
-}
+    top: 5.5rem;
+    left: 6.25rem;}
 
 .cell {
     border: 1px solid lightgrey;
@@ -100,6 +97,7 @@ html {
     width: max-content;
     height: -webkit-fill-available; 
 }
+
 .header-cell {
     display: inline-block;
     height: 27px;
@@ -113,6 +111,67 @@ html {
     text-shadow: 1px;
 }
 
+.header-cell.row {
+    display: inline-block;
+    height: 27px;
+    border: 1px solid lightgrey;
+    width: px;
+    text-align: center;
+    padding: 4px;   
+    font-family: system-ui;
+    color: black;
+    text-shadow: 1px;
+}
+
+.cursor {
+    animation: mymove 4s infinite;
+}
+.header-cursor {
+    /* animation: mymove 5s infinite; */
+    background: black !important;
+    color:white !important;
+}
+
+
+.header-cell.corner {
+    grid-area: selectAll;
+    position: fixed;
+    top: 5.5rem;
+    z-index: 1000;
+    width: 6.25rem;
+    background-image: linear-gradient(135deg,black, grey, white,  #61242491,  #61242491) !important;
+}
+
+.menu-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: blue;
+    overflow: hidden;
+    z-index: 10000;
+    height: 2rem;
+}
+
+.tool-bar {
+    position: fixed;
+    top: 2rem;
+    height: 2.5rem;
+    width: 100%;
+    background:white;
+    overflow: hidden;
+    z-index: 10000;
+    height: 2rem;
+}
+
+.function-bar {
+    position: fixed;
+    top: 4rem;
+    width: 100%;
+    background:beige;
+    overflow: hidden;
+    z-index: 10000;
+    height: 1.5rem;
+}
 
 .color0col {
     background-image: linear-gradient(to right, #61242491, #ff000066);
@@ -162,13 +221,11 @@ html {
 .color7row {
     background-image: linear-gradient(to bottom,#ee82ee85, #61242491);
 }
-.cursor {
-    animation: mymove 5s infinite;
-}
+
 @keyframes mymove {
     0% {border: 2px solid blue;}
     25% {border: 2px solid indigo;}
-    50% {border: 2px solid violet;}
+    50% {border: 2px solid yellow;}
     75% {border: 2px solid orange;}
     100% {border: 2px solid green;}
     
