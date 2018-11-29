@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/actions'
 import PropTypes from 'prop-types'
 import React from 'react'
+import _debounce from 'lodash.debounce'
 
 const doSomething = (scroll_posX, scroll_posY) => {
     console.log(scroll_posX, scroll_posY)
@@ -13,6 +14,8 @@ class KeyBindings extends React.Component {
     static propTypes = {
         actions: PropTypes.object,
     }
+
+
     
     last_known_scrollY_position = 0
     last_known_scrollX_position = 0
@@ -89,11 +92,19 @@ class KeyBindings extends React.Component {
             value
         })
     }
-    moveCursor = (col, row) => { //DEBOUNCE && extract this same logic used in cellEditor
+
+    moveCursor = _debounce(
+        (row,col) => {
+            console.log(col, row)
+            this._moveCursor(row,col)
+        },
+        1,
+    ).bind(this)
+
+    _moveCursor = (col, row) => {
         const { cursorLocation, actions } = this.props
         const newLocation = [row + cursorLocation[0], col + cursorLocation[1]]
         actions.setCursor(...newLocation)
-
     }
 
     render() {
