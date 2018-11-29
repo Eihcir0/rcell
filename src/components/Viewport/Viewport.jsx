@@ -14,13 +14,13 @@ import KeyBindings from './KeyBindings'
 /** 
  * NEXT STEPS:
  * 
- * Add viewport and viewportHeightWidth to redux and use integers for gods sake (not strings)
  * Implement logic on move:
  *  - When you move to or beyond one or two edges of viewport -- if totalCols/Rows is greater than scroll viewport 1 to that direction
-
+ * BUG:  scrolling to right and down
  * REFACTOR!!: 
  *  - Divide up redux state, 
- *  - file structure (redux folder)
+ * WRITE TESTS!
+ * UPDATE PROPTYPES (and default props!)
  * 
  * Add listener to screen height/width to invoke action setViewPortHeight and Width
  *  - on scroll --> do same redux actions

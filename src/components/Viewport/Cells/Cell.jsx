@@ -82,13 +82,6 @@ class Cell extends React.Component {
     }
 }
 
-// function mapStateToProps(state) {
-    
-//     return {
-//         // cursorLocation: state.grid.cursorLocation,
-//     }
-// }
-
 function mapDispatchToProps(dispatch) {
     return {
        actions: bindActionCreators(actions, dispatch)

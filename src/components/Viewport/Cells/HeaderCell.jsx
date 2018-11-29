@@ -4,21 +4,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../../../redux/actions/actions'
+import { colLetterFromNumber } from '../../../magic/helpers/formulaHelpers'
 
-
-const ABCS = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-const getColLabel = (num) => {
-    //this needs tlc
-    if (!Number.isInteger(num)) return
-    if (num <= 25) return ABCS[(num + 1)]
-    const base26 = `${parseInt(String(num)).toString(26)}`.split('')
-    base26[0] -= 1
-    const letters = []
-    for (let number of base26) {
-        letters.push(ABCS[(parseInt(number, 26) + 1)])
-    }
-    return letters.join('')
-}
 
 class HeaderCell extends React.Component {  // wish this could extend cell.jsx
     static propTypes = {
@@ -31,7 +18,7 @@ class HeaderCell extends React.Component {  // wish this could extend cell.jsx
     renderLabel = () => {
         const { type, col, row } = this.props
         if (type === 'col') {
-            return getColLabel(col)
+            return colLetterFromNumber(col)
         } else if (type === 'row') {
             return row + 1
         }

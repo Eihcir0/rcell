@@ -89,7 +89,7 @@ class KeyBindings extends React.Component {
             value
         })
     }
-    moveCursor = (col, row) => { //extract this same logic used in cellEditor
+    moveCursor = (col, row) => { //DEBOUNCE && extract this same logic used in cellEditor
         const { cursorLocation, actions } = this.props
         const newLocation = [row + cursorLocation[0], col + cursorLocation[1]]
         actions.setCursor(...newLocation)

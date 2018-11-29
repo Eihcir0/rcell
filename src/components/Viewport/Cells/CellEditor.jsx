@@ -103,13 +103,6 @@ class CellEditor extends React.PureComponent {
     }
 }
 
-function mapStateToProps(state) {
-    
-    return {
-        // cursorLocation: state.grid.cursorLocation,
-    }
-}
-
 function mapDispatchToProps(dispatch) {
     return {
        actions: bindActionCreators(actions, dispatch)
@@ -117,6 +110,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
 )(CellEditor)
