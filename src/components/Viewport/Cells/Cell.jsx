@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
 import PropTypes from 'prop-types'
-import * as actions from '../../actions/actions'
+import * as actions from '../../../redux/actions/actions'
 
 class Cell extends React.Component {
     static propTypes = {

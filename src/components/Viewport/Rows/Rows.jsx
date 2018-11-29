@@ -38,7 +38,6 @@ class Rows extends React.Component {
 
     renderRows = () => {
         const rows = []
-        // debugger
         for (let rowIdx = this.props.viewport[0]; rowIdx < Math.min(this.props.totalRows - 1, (this.props.viewport[0] + this.props.viewportHeight)); rowIdx++) {
             
             const {

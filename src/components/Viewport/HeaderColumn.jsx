@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import * as actions from '../actions/actions'
+import * as actions from '../../redux/actions/actions'
 import HeaderCell from './Cells/HeaderCell'
 
 class HeaderColumn extends React.Component {

@@ -17,7 +17,7 @@ body {
   /* overflow: hidden; */
 }
 
-.grid {
+.viewport {
     display: grid;
     grid-template-areas:
         "selectAll header"

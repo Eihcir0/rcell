@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as actions from '../actions/actions'
+import * as actions from '../../redux/actions/actions'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -33,7 +33,7 @@ import KeyBindings from './KeyBindings'
  * */
 
 
-class Grid extends React.Component {
+class Viewport extends React.Component {
 
     static propTypes = {
         actions: PropTypes.object,
@@ -45,7 +45,7 @@ class Grid extends React.Component {
 
     render() {
         return (
-            <div className="grid">
+            <div className="viewport">
                 <KeyBindings/>
                 <HeaderCorner/>
                 <HeaderRow/>
@@ -71,4 +71,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Grid)
+)(Viewport)
