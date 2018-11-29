@@ -21,7 +21,7 @@ export const colFromLetters = (string) => {
 
 export const colLetterFromNumber = (origNum) => {
     if (!Number.isInteger(origNum)) return
-    if (origNum <= 25) return ABCS[(origNum + 1)]
+    if (origNum <= 25) return ABCS[(origNum)]
 
     let num = origNum - 26
     const base26 = `${parseInt(String(num)).toString(26)}`.split('')
