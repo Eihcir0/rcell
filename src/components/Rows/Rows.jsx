@@ -38,7 +38,8 @@ class Rows extends React.Component {
 
     renderRows = () => {
         const rows = []
-        for (let rowIdx = 0; rowIdx < this.props.totalRows; rowIdx++) {
+        // debugger
+        for (let rowIdx = this.props.viewport[0]; rowIdx < Math.min(this.props.totalRows - 1, (this.props.viewport[0] + this.props.viewportHeight)); rowIdx++) {
             
             const {
                 cursorLocation,
@@ -50,10 +51,12 @@ class Rows extends React.Component {
                 <Row
                     key={rowIdx}
                     row={rowIdx}
-                    cursorLocation={cursorLocation}
                     editingLocation={editingLocation}
+                    cursorLocation={cursorLocation}
                     values={this.props.values[rowIdx]}
                     cellEditorStartingValue={cellEditorStartingValue}
+                    viewport={this.props.viewport[1]}
+                    viewportWidth={this.props.viewportWidth}
                 />
             )
         }
@@ -77,6 +80,10 @@ function mapStateToProps(state) {
         editingLocation: state.grid.editingLocation,
         cellEditorStartingValue: state.grid.cellEditorStartingValue,
         values: state.grid.values,
+        viewport: state.grid.viewport,
+        heights: state.grid.heights,
+        viewportHeight: state.grid.viewportHeight,
+        viewportWidth: state.grid.viewportWidth,
     }
 }
 

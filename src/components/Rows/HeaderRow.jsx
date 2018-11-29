@@ -12,12 +12,13 @@ class HeaderRow extends React.Component {
 
     renderHeaderCells = () => {
         let cols = []
-        for (let colIdx = 0; colIdx < this.props.totalCols; colIdx++) {
+        for (let colIdx = this.props.viewport[1]; colIdx < Math.min(this.props.totalCols - 1, (this.props.viewport[1] + this.props.viewportWidth)); colIdx++) {
             cols.push(
                 <HeaderCell
                     type={'col'}
                     key={colIdx}
                     col={colIdx}
+                    colWidth={this.props.widths[colIdx]}
                     isCursor={colIdx === this.props.cursorLocation[1]}
                 />
             )
@@ -38,6 +39,9 @@ function mapStateToProps(state) {
     return {
         totalCols: state.grid.totalCols,
         cursorLocation: state.grid.cursorLocation,
+        widths: state.grid.widths,
+        viewport: state.grid.viewport,
+        viewportWidth: state.grid.viewportWidth,
     }
 }
 

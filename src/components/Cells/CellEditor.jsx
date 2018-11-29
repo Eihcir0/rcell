@@ -19,7 +19,7 @@ class CellEditor extends React.PureComponent {
     }
 
     componentDidMount() {
-        this.props.actions.resetStartingValue()
+        this.props.actions.resetStartingEditorValue()
     }
 
     handleChange =  (e) => {

@@ -55,9 +55,11 @@ class Cell extends React.Component {
 
     render() {
         const editorValue = [undefined].includes(this.props.cellEditorStartingValue) ? this.props.enteredValue : this.props.cellEditorStartingValue
-
+        const style = {
+            width: `${this.props.colWidth}px`
+        }
         return (
-            <div className={this.getContainerClass()} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick}>
+            <div className={this.getContainerClass()} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} style={style}>
                 <div className={this.getClass()}>
                     {this.props.isEditing && (
                         <CellEditor

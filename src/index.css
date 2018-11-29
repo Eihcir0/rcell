@@ -1,3 +1,5 @@
+/* @import 'meyer-reset.css'   <<-- investigate why meyer reset not working*/  
+
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -12,6 +14,7 @@ html {
 body {
   margin: 0;
   overscroll-behavior: none;
+  /* overflow: hidden; */
 }
 
 .grid {
@@ -19,7 +22,7 @@ body {
     grid-template-areas:
         "selectAll header"
         "nav content";
-    grid-template-columns: 100px 10000px;
+    grid-template-columns: 2rem 10000px;
     grid-template-rows: 19px;
     margin-top: 5.5rem;
     height: 1000vh;
@@ -29,7 +32,11 @@ body {
 .rows {
     grid-area: content;
     margin-top: 0.5rem;
+    position: fixed;
+    left: 2rem;
+    top: 6.7rem;
 }
+
 .row {
     display: flex;
     background-color: white;
@@ -56,13 +63,10 @@ body {
 
 .header-column {
     grid-area: nav;
-    position: sticky;
+    position: fixed;
     flex-direction: column;
     display: flex;
-    left: 0px;
-    top: 0px;
-    margin-top: 0.5rem;
-
+    top: 7.1rem;
 }
 
 .header-row {
@@ -70,11 +74,11 @@ body {
     position: fixed;
     width: 100000px;
     top: 5.5rem;
-    left: 6.25rem;}
+    left: 2rem;}
 
 .cell {
     border: 1px solid lightgrey;
-    width: 100px;
+    /* width: 100px; */
     height: 27px;
     padding: 1px;
     font-family: system-ui;
@@ -107,6 +111,7 @@ body {
     background: azure;
     padding: 4px;   
     font-family: system-ui;
+    font-size: smaller;
     color: black;
     text-shadow: 1px;
 }
@@ -114,6 +119,7 @@ body {
 .header-cell.row {
     display: inline-block;
     height: 27px;
+    width: 2rem;
     border: 1px solid lightgrey;
     width: px;
     text-align: center;
@@ -124,7 +130,9 @@ body {
 }
 
 .cursor {
+    border: 2px solid blue;
     animation: mymove 4s infinite;
+    /* animation-delay: 5s; */
 }
 .header-cursor {
     /* animation: mymove 5s infinite; */
@@ -138,7 +146,7 @@ body {
     position: fixed;
     top: 5.5rem;
     z-index: 1000;
-    width: 6.25rem;
+    width: 2rem;
     background-image: linear-gradient(135deg,black, grey, white,  #61242491,  #61242491) !important;
 }
 
@@ -146,7 +154,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: blue;
+    background: #e7f2f5;;
     overflow: hidden;
     z-index: 10000;
     height: 2rem;
@@ -157,7 +165,7 @@ body {
     top: 2rem;
     height: 2.5rem;
     width: 100%;
-    background:white;
+    background:#e7f2f5;;
     overflow: hidden;
     z-index: 10000;
     height: 2rem;
@@ -223,13 +231,43 @@ body {
 }
 
 @keyframes mymove {
+    0% {
+        border: 2px solid blue;
+        /* box-shadow: 5px 6px 100px 10px yellow */
+    }
+    20% {
+        border: 2px solid blue;
+        /* box-shadow: 5px 6px 100px 10px turquoise */
+    }
+    40% {
+        border: 2px solid indigo;
+        /* box-shadow: 5px 6px 100px 10px purple */
+    }
+    60% {
+        border: 2px solid violet;
+        /* box-shadow: 5px 6px 100px 10px green */
+    }
+    80% {
+        border: 2px solid orange;
+        /* box-shadow: 5px 6px 100px 10px orange */
+    }
+    100% {
+        border: 2px solid green;
+        /* box-shadow: 5px 6px 100px 10px violet */
+    }
+    
+}
+/* @keyframes mymove {
     0% {border: 2px solid blue;}
-    25% {border: 2px solid indigo;}
-    50% {border: 2px solid yellow;}
+    25% {
+        border: 2px solid indigo;
+        box-shadow: 5px 6px 100px 10px yellow
+    }
+    50% {border: 2px solid violet;}
     75% {border: 2px solid orange;}
     100% {border: 2px solid green;}
     
-}
+} */
 
 .flip {
     animation: myflip 0.4s;

@@ -1,6 +1,22 @@
 const totalCols = 30
 const totalRows = 30
 
+const getStartingWidths = (totalCols) => {
+  const widths = []
+  for (let colIdx = 0; colIdx < totalCols; colIdx++) {
+    widths.push(100)
+  }
+  return widths
+}
+
+const getStartingHeights = (totalRows) => {
+  const heights = []
+  for (let rowIdx = 0; rowIdx < totalCols; rowIdx++) {
+    heights.push(27)
+  }
+  return heights
+}
+
 const getStartingGridValues = (totalCols, totalRows) => {
   const grid = []
   for (let rowIdx = 0; rowIdx < totalRows; rowIdx++) {
@@ -27,16 +43,25 @@ const getStartingGridValues = (totalCols, totalRows) => {
 }
 
 
- const blankState = {
+const blankState = {
   totalRows,
   totalCols,
   cursorLocation: [0,0],
   editingLocation: false,
   values: getStartingGridValues(totalCols, totalRows),
   gridShifted: false,
+  viewport: [0,0],
+  viewportHeight__cached: null,
+  viewportWidth__cached: null,
+  widths: getStartingWidths(totalCols),
+  heights: getStartingHeights(totalRows),
 }
 
 const localState = localStorage.getItem('rcell')
 const initialState = localState ? JSON.parse(localState) : blankState
-
+initialState.viewport = [5,5]
+initialState.viewportWidth = 20
+initialState.viewportHeight = 20
+initialState.widths = getStartingWidths(initialState.totalCols)
+initialState.heights = getStartingHeights(initialState.totalRow)
 export default initialState

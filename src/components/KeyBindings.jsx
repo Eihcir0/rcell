@@ -4,26 +4,54 @@ import * as actions from '../actions/actions'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+const doSomething = (scroll_posX, scroll_posY) => {
+    console.log(scroll_posX, scroll_posY)
+}
+
 
 class KeyBindings extends React.Component {
     static propTypes = {
         actions: PropTypes.object,
     }
-
+    
+    last_known_scrollY_position = 0
+    last_known_scrollX_position = 0
+    ticking = false
+    
     componentDidMount() {
         window.addEventListener('keydown', this.keydown.bind(this))
+        
+        
+        window.addEventListener('scroll', function (e) {
+            
+            this.last_known_scrollY_position = window.scrollY;
+            this.last_known_scrollX_position = window.scrollX;
+            
+            if (!this.ticking) {
+                
+                window.requestAnimationFrame(() => {
+                    doSomething(this.last_known_scrollY_position, this.last_known_scrollX_position);
+                    this.ticking = false;
+                });
+                
+                this.ticking = true;
+                
+            }
+            
+        })
+    
     }
-
+    
     keydown = (e) => {
         if (this.props.editingLocation && this.props.editingLocation.length) return
         switch (e.keyCode) {
             case 37:
-                e.preventDefault()
-                this.moveCursor(-1, 0)
-                break;
+            e.preventDefault()
+            this.moveCursor(-1, 0)
+            break;
             case 38:
-                e.preventDefault()
-                this.moveCursor(0, -1)
+            e.preventDefault()
+            this.moveCursor(0, -1)
                 break;
             case 39:
                 e.preventDefault()

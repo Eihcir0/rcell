@@ -10,9 +10,37 @@ import HeaderCorner from './Cells/HeaderCorner'
 import Rows from './Rows/Rows'
 import KeyBindings from './KeyBindings'
 
+
+/** 
+ * NEXT STEPS:
+ * 
+ * Add viewport and viewportHeightWidth to redux and use integers for gods sake (not strings)
+ * Implement logic on move:
+ *  - When you move to or beyond one or two edges of viewport -- if totalCols/Rows is greater than scroll viewport 1 to that direction
+
+ * REFACTOR!!: 
+ *  - Divide up redux state, 
+ *  - file structure (redux folder)
+ * 
+ * Add listener to screen height/width to invoke action setViewPortHeight and Width
+ *  - on scroll --> do same redux actions
+ * Then move on to keyboard commands
+ * Then move on to some basic formatting like bold / italic / underline
+ * Copy paste
+ * Undo
+ * 
+ * 
+ * */
+
+
 class Grid extends React.Component {
+
     static propTypes = {
         actions: PropTypes.object,
+    }
+
+    componentWillMount() {
+        this.props.actions.refreshViewportDimensions()
     }
 
     render() {
@@ -36,6 +64,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
        actions: bindActionCreators(actions, dispatch),
+
     }
 }
 

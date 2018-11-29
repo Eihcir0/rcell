@@ -14,7 +14,7 @@ class HeaderColumn extends React.Component {
 
     renderHeaderCells = () => {
         let cols = []
-        for (let rowIdx = 0; rowIdx < this.props.totalRows; rowIdx++) {
+        for (let rowIdx = this.props.viewport[0]; rowIdx < this.props.viewportHeight; rowIdx++) {
             cols.push(
                 <HeaderCell
                     type={'row'}
@@ -41,6 +41,8 @@ function mapStateToProps(state) {
     return {
         totalRows: state.grid.totalRows,
         cursorLocation: state.grid.cursorLocation,
+        viewport: state.grid.viewport,
+        viewportHeight: state.grid.viewportHeight,
     }
 }
 

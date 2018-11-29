@@ -13,13 +13,14 @@ class Row extends React.Component {
 
     renderCells = () => {
         let cols = []
-        for (let colIdx = 0; colIdx < this.props.totalCols; colIdx++) {
+        for (let colIdx = this.props.viewport; colIdx < this.props.viewportWidth; colIdx++) {
             let isEditing = this.props.editingLocation === colIdx
             const cellEditorStartingValue = isEditing ? this.props.cellEditorStartingValue : undefined
             cols.push(
                 <Cell
                     key={colIdx}
                     col={colIdx}
+                    colWidth={this.props.widths[colIdx]}
                     row={this.props.row}
                     isCursor={this.props.cursorLocation === colIdx}
                     isEditing={isEditing}
@@ -46,6 +47,7 @@ function mapStateToProps(state) {
     return {
         totalCols: state.grid.totalCols,
         gridShifted: state.grid.gridShifted,
+        widths: state.grid.widths,
     }
 }
 

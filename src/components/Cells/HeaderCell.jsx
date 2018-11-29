@@ -20,7 +20,7 @@ const getColLabel = (num) => {
     return letters.join('')
 }
 
-class HeaderCell extends React.Component {
+class HeaderCell extends React.Component {  // wish this could extend cell.jsx
     static propTypes = {
         actions: PropTypes.object,
         row: PropTypes.number,
@@ -48,9 +48,15 @@ class HeaderCell extends React.Component {
 
     }
 
+    getStyle = () => {
+        return {
+            width: `${this.props.colWidth}px`
+        }
+    }
+
     render() {
         return (
-            <div className={this.getClass()}>
+            <div className={this.getClass()} style={this.getStyle()}>
                 {this.renderLabel()}
             </div>
         )
