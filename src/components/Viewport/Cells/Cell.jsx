@@ -69,13 +69,11 @@ class Cell extends React.Component {
                             handleChange={this.handleChange}
                         />
                     )}
-                        {
-                            !this.props.isEditing && (
-                                <div className="cell-display">
-                                    {this.props.displayValue}
-                                </div>
-                            )
-                        }
+                    {!this.props.isEditing && (
+                        <div className="cell-display">
+                            {this.props.displayValue}
+                        </div>
+                    )}
                 </div>
             </div>
         )

@@ -2,7 +2,7 @@ import {combineReducers} from 'redux';
 import grid from './gridReducer';
 
 const rootReducer = combineReducers({
-  grid
+    grid
 });
 
 export default rootReducer;
