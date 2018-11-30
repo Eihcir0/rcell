@@ -29,7 +29,10 @@ import KeyBindings from './KeyBindings'
  * Copy paste
  * Undo
  * 
+ * Scroll goes to edge on top and left!
+ * Clicking off cell enters value -- on blur?
  * 
+ *
  * */
 
 

@@ -36,10 +36,14 @@ class Rows extends React.Component {
         }
     }
 
+    totalViewportRows = () => {
+        const viewportRows = this.props.viewportHeight + this.props.viewport[0]
+        return Math.min(this.props.totalRows, viewportRows)
+    }
+
     renderRows = () => {
         const rows = []
-        for (let rowIdx = this.props.viewport[0]; rowIdx < Math.min(this.props.totalRows - 1, (this.props.viewport[0] + this.props.viewportHeight)); rowIdx++) {
-            
+        for (let rowIdx = this.props.viewport[0]; rowIdx < this.totalViewportRows(); rowIdx++) {
             const {
                 cursorLocation,
                 editingLocation,
