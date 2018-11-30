@@ -13,7 +13,7 @@ class HeaderColumn extends React.Component {
     }
 
     totalViewportRows = () => {
-        const viewportRows = this.props.viewportHeight + this.props.viewport[0]
+        const viewportRows = this.props.viewportBottom + this.props.viewport[0]
         return Math.min(this.props.totalRows, viewportRows)
     }
 
@@ -47,7 +47,7 @@ function mapStateToProps(state) {
         totalRows: state.grid.totalRows,
         cursorLocation: state.grid.cursorLocation,
         viewport: state.grid.viewport,
-        viewportHeight: state.grid.viewportHeight,
+        viewportBottom: state.grid.viewportBottom,
     }
 }
 

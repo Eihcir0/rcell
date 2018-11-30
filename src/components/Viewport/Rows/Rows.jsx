@@ -37,7 +37,7 @@ class Rows extends React.Component {
     }
 
     totalViewportRows = () => {
-        const viewportRows = this.props.viewportHeight + this.props.viewport[0]
+        const viewportRows = this.props.viewportBottom + this.props.viewport[0]
         return Math.min(this.props.totalRows, viewportRows)
     }
 
@@ -59,7 +59,7 @@ class Rows extends React.Component {
                     values={this.props.values[rowIdx]}
                     cellEditorStartingValue={cellEditorStartingValue}
                     viewport={this.props.viewport[1]}
-                    viewportWidth={this.props.viewportWidth}
+                    viewportRight={this.props.viewportRight}
                 />
             )
         }
@@ -85,8 +85,8 @@ function mapStateToProps(state) {
         values: state.grid.values,
         viewport: state.grid.viewport,
         heights: state.grid.heights,
-        viewportHeight: state.grid.viewportHeight,
-        viewportWidth: state.grid.viewportWidth,
+        viewportBottom: state.grid.viewportBottom,
+        viewportRight: state.grid.viewportRight,
     }
 }
 

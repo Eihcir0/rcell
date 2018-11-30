@@ -22,7 +22,7 @@ import KeyBindings from './KeyBindings'
  * WRITE TESTS!
  * UPDATE PROPTYPES (and default props!)
  * 
- * Add listener to screen height/width to invoke action setViewPortHeight and Width
+ * Add listener to screen height/width to invoke action setViewportBottom and Width
  *  - on scroll --> do same redux actions
  * Then move on to keyboard commands
  * Then move on to some basic formatting like bold / italic / underline

@@ -16,8 +16,8 @@ import {
 import {
 	offGrid,
 	checkEdges,
-	getViewportWidth,
-	getViewportHeight,
+	getViewportRight,
+	getViewportBottom,
 } from '../../magic/helpers/gridHelpers'
 	
 import {
@@ -45,11 +45,14 @@ export default function grid(state = initialState, action) {
 				...state,
 				cursorLocation: [action.row, action.col],
 			}
-
-			const newViewport = checkEdges(state, newState.cursorLocation)
+            
+            const newViewport = checkEdges(state, newState.cursorLocation)
 			if (newViewport) {
-				newState.viewport = newViewport // maybe better to fire action
-			}
+                newState.viewport = newViewport // maybe better to fire action
+                newState.viewportBottom = getViewportBottom(newState)
+                newState.viewportRight = getViewportRight(newState)
+            }
+
 			return newState
 		
 		case SET_VALUE:
@@ -89,7 +92,10 @@ export default function grid(state = initialState, action) {
 			newState = {
 				...state,
 				viewport,
-			}
+            }
+            newState.viewportBottom = getViewportBottom(newState)
+            newState.viewportRight = getViewportRight(newState)
+
 			return newState
 			
 		case SCROLL_DOWN:
@@ -122,11 +128,9 @@ export default function grid(state = initialState, action) {
 		case REFRESH_VIEWPORT:
 			newState = {
 				...state,
-				viewportHeight: getViewportHeight(state),
-				viewportWidth: getViewportWidth(state),
+				viewportBottom: getViewportBottom(state),
+				viewportRight: getViewportRight(state),
 			}
-			console.log(newState.viewportWidth)
-			console.log(newState.viewportHeight)
 			return newState
 			
 		default:

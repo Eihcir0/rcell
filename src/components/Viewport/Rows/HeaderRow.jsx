@@ -10,9 +10,13 @@ class HeaderRow extends React.Component {
         totalCols: PropTypes.number.isRequired,
     }
 
+    totalDisplayCols = () => {
+        return Math.min(this.props.totalCols, this.props.viewportRight)
+    }
+
     renderHeaderCells = () => {
         let cols = []
-        for (let colIdx = this.props.viewport[1]; colIdx < Math.min(this.props.totalCols - 1, (this.props.viewport[1] + this.props.viewportWidth)); colIdx++) {
+        for (let colIdx = this.props.viewport[1]; colIdx < this.totalDisplayCols(); colIdx++) {
             cols.push(
                 <HeaderCell
                     type={'col'}
@@ -23,6 +27,7 @@ class HeaderRow extends React.Component {
                 />
             )
         }
+
         return cols
     }
 
@@ -41,7 +46,7 @@ function mapStateToProps(state) {
         cursorLocation: state.grid.cursorLocation,
         widths: state.grid.widths,
         viewport: state.grid.viewport,
-        viewportWidth: state.grid.viewportWidth,
+        viewportRight: state.grid.viewportRight,
     }
 }
 

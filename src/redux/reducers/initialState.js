@@ -51,8 +51,8 @@ const blankState = {
     values: getStartingGridValues(totalCols, totalRows),
     gridShifted: false,
     viewport: [0,0],
-    viewportHeight__cached: null,
-    viewportWidth__cached: null,
+    viewportBottom__cached: null,
+    viewportRight__cached: null,
     widths: getStartingWidths(totalCols),
     heights: getStartingHeights(totalRows),
 }
@@ -60,8 +60,9 @@ const blankState = {
 const localState = localStorage.getItem('rcell')
 const initialState = localState ? JSON.parse(localState) : blankState
 initialState.viewport = [5,5]
-initialState.viewportWidth = 20
-initialState.viewportHeight = 20
+initialState.cursorLocation = [5,5]
+initialState.viewportRight = 20
+initialState.viewportBottom = 20
 initialState.widths = getStartingWidths(initialState.totalCols)
 initialState.heights = getStartingHeights(initialState.totalRow)
 export default initialState

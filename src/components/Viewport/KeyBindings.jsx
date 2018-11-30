@@ -95,7 +95,6 @@ class KeyBindings extends React.Component {
 
     moveCursor = _debounce(
         (row,col) => {
-            console.log(col, row)
             this._moveCursor(row,col)
         },
         1,

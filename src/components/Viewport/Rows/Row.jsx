@@ -11,9 +11,14 @@ class Row extends React.Component {
         values: PropTypes.array.isRequired,
     }
 
+    totalDisplayCols = () => {
+        return Math.min(this.props.totalCols, this.props.viewportRight)
+    }
+
+
     renderCells = () => {
         let cols = []
-        for (let colIdx = this.props.viewport; colIdx < this.props.viewportWidth; colIdx++) {
+        for (let colIdx = this.props.viewport[1]; colIdx < this.totalDisplayCols(); colIdx++) {
             let isEditing = this.props.editingLocation === colIdx
             const cellEditorStartingValue = isEditing ? this.props.cellEditorStartingValue : undefined
             cols.push(
@@ -48,6 +53,8 @@ function mapStateToProps(state) {
         totalCols: state.grid.totalCols,
         gridShifted: state.grid.gridShifted,
         widths: state.grid.widths,
+        viewportRight: state.grid.viewportRight,
+        viewport: state.grid.viewport,
     }
 }
 
