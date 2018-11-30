@@ -30,10 +30,10 @@ export const getViewportHeight = (state) => {
         viewport,
         totalRows,
     } = state
-    let counter = viewport[1]
-    let height = Number(heights[viewport[1]])
+    let height = heights[viewport[0]]
+    let counter = viewport[0] + 1
     for (let idx = counter; idx < totalRows; idx++) {
-        if ((height + Number(heights[idx])) < window.outerHeight - HEIGHT_OFFSET_PX) {
+        if ((height + heights[idx]) < window.outerHeight - HEIGHT_OFFSET_PX) {
             counter++
             height += Number(heights[idx])
         } else {

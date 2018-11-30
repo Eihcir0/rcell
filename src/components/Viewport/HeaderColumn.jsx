@@ -12,9 +12,14 @@ class HeaderColumn extends React.Component {
         cursorLocation: PropTypes.array
     }
 
+    totalViewportRows = () => {
+        const viewportRows = this.props.viewportHeight + this.props.viewport[0]
+        return Math.min(this.props.totalRows, viewportRows)
+    }
+
     renderHeaderCells = () => {
         let cols = []
-        for (let rowIdx = this.props.viewport[0]; rowIdx < this.props.viewportHeight; rowIdx++) {
+        for (let rowIdx = this.props.viewport[0]; rowIdx < this.totalViewportRows(); rowIdx++) {
             cols.push(
                 <HeaderCell
                     type={'row'}
