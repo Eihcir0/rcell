@@ -30,14 +30,18 @@ class Cell extends React.Component {
         if (this.state.flip) className += ' flip'
         return className    
     }
-    
-    handleChange = () => {
+
+    setFlip = () => {
         this.setState({
             flip: true
         })
         setTimeout(()=>{
             this.setState({flip: false})
         }, 1000)
+    }
+    
+    handleChange = () => {
+        this.setFlip()
     }
 
     handleClick = () => {

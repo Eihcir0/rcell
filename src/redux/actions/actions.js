@@ -38,6 +38,7 @@ export const scrollLeft = (value = 1) => {
     return { type: SCROLL_LEFT, value }
 }
 export const scrollRight = (value = 1) => {
+    console.log('here ok!!')
     return { type: SCROLL_RIGHT, value }
 }
 

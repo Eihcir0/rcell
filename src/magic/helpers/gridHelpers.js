@@ -19,7 +19,7 @@ export const getViewportRight = (state) => {
             break
         }
     }
-    return counter + 1
+    return counter
 
 }
 
@@ -80,7 +80,9 @@ export const checkEdges = (state, newCursorLocation) => {
         newViewport[1] -= 1
     }
     if (checkEdge('right', state, newCursorLocation)) {
-        newViewport[1] += 1
+        if (state.cursorLocation[1] < newCursorLocation[1]) {
+            newViewport[1] += 1
+        }
     }
     if (checkEdge('top', state, newCursorLocation)) {
         newViewport[0] -= 1

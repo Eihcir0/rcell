@@ -114,7 +114,15 @@ body {
     font-size: smaller;
     color: black;
     text-shadow: 1px;
+    /* animation: brighter 10s infinite; */
 }
+@keyframes brighter {
+    50% { 
+        filter: brightness(1.3);
+        border: 1px solid darkgray;
+    }
+}
+
 
 .header-cell.row {
     display: inline-block;

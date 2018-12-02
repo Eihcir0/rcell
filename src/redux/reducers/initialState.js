@@ -1,5 +1,5 @@
-const totalCols = 30
-const totalRows = 30
+const totalCols = 500
+const totalRows = 500
 
 const getStartingWidths = (totalCols) => {
     const widths = []
@@ -59,10 +59,10 @@ const blankState = {
 
 const localState = localStorage.getItem('rcell')
 const initialState = localState ? JSON.parse(localState) : blankState
-initialState.viewport = [5,5]
-initialState.cursorLocation = [5,5]
 initialState.viewportRight = 20
 initialState.viewportBottom = 20
 initialState.widths = getStartingWidths(initialState.totalCols)
 initialState.heights = getStartingHeights(initialState.totalRow)
+initialState.viewport = [0, 0]
+initialState.cursorLocation = [0, 0]
 export default initialState

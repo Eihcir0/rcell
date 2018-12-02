@@ -5,8 +5,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import _debounce from 'lodash.debounce'
 
-const doSomething = (scroll_posX, scroll_posY) => {
-    console.log(scroll_posX, scroll_posY)
+const debounced = (fn, wait=0) => {
+    return _debounce((...args) => {
+        fn(...args)
+    }, wait)
 }
 
 
@@ -20,53 +22,88 @@ class KeyBindings extends React.Component {
     last_known_scrollY_position = 0
     last_known_scrollX_position = 0
     ticking = false
+
+    keyMap = {}
     
     componentDidMount() {
-        window.addEventListener('keydown', this.keydown.bind(this))
+        window.addEventListener('keydown', this.keyDown.bind(this))
+        window.addEventListener('keyup', this.keyUp.bind(this))
+        window.addEventListener('wheel', this.wheel.bind(this))
+    }
+
+    wheel = (e) => {
+        e.preventDefault()
+        if (e.deltaX > 5) this.scrollRight()
+        if (e.deltaX < -5) this.scrollLeft()
+        if (e.deltaY > 5) this.scrollDown()
+        if (e.deltaY < -5) this.scrollUp()
         
-        
-        window.addEventListener('scroll', function (e) {
-            
-            this.last_known_scrollY_position = window.scrollY;
-            this.last_known_scrollX_position = window.scrollX;
-            
-            if (!this.ticking) {
-                
-                window.requestAnimationFrame(() => {
-                    doSomething(this.last_known_scrollY_position, this.last_known_scrollX_position);
-                    this.ticking = false;
-                });
-                
-                this.ticking = true;
-                
-            }
-            
-        })
-    
+    }
+
+    keyUp = (e) => {
+        this.removeKey(e.keyCode)
+    }
+
+    addKey = (key) => {
+        this.keyMap[key] = true
+    }
+
+    removeKey = (key) => {
+        this.keyMap[key] = false
     }
     
-    keydown = (e) => {
+    keyDown = (e) => {
+        this.addKey(e.keyCode)
         if (this.props.editingLocation && this.props.editingLocation.length) return
+        console.log(e.keyCode)
         switch (e.keyCode) {
-            case 37:
+            case 37: //left
             e.preventDefault()
-            this.moveCursor(-1, 0)
+                if (this.keyMap[18]) {
+                    this.scrollLeft()
+                } else if (this.keyMap[91]) {
+                    this.jump('left')
+                } else {
+                    this.moveCursor(-1, 0)
+                }
             break;
-            case 38:
-            e.preventDefault()
-            this.moveCursor(0, -1)
-                break;
-            case 39:
+            case 38: // up
                 e.preventDefault()
-                this.moveCursor(1, 0)
+                if (this.keyMap[18]) {
+                    this.scrollUp()
+                } else if (this.keyMap[91]) {
+                    this.jump('up')
+                } else {
+                    this.moveCursor(0, -1)
+                }
                 break;
-            case 40:
+            case 39: //right
                 e.preventDefault()
-                this.moveCursor(0, 1)
+                if (this.keyMap[18]) {
+                    this.scrollRight()
+                } else if (this.keyMap[91]) {
+                    this.jump('right')
+                } else {
+                    this.moveCursor(1, 0)
+                }
+                break;
+            case 40: // down
+                e.preventDefault()
+                if (this.keyMap[18]) {
+                    this.scrollDown()
+                } else if (this.keyMap[91]) {
+                    this.jump('down')
+                } else {
+                    this.moveCursor(0, 1)
+                }
                 break;
             case 9: //Tab
                 e.preventDefault()
-                this.moveCursor(1, 0)
+                if (this.keyMap[16]) {
+                    this.moveCursor(-1, 0)
+                } else {
+                    this.moveCursor(1, 0)
+                }
                 break;
             case 8: //Backspace
                 e.preventDefault()
@@ -93,18 +130,38 @@ class KeyBindings extends React.Component {
         })
     }
 
-    moveCursor = _debounce(
-        (row,col) => {
-            this._moveCursor(row,col)
-        },
-        1,
-    ).bind(this)
+    jump = (direction) => {
+        console.log(direction)
+    }
 
+    
     _moveCursor = (col, row) => {
         const { cursorLocation, actions } = this.props
         const newLocation = [row + cursorLocation[0], col + cursorLocation[1]]
         actions.setCursor(...newLocation)
     }
+    
+    _scrollRight = (col, row) => {
+        this.props.actions.scrollRight()
+    }
+    
+    _scrollLeft = (col, row) => {
+        this.props.actions.scrollLeft()
+    }
+    
+    _scrollDown = (col, row) => {
+        this.props.actions.scrollDown()
+    }
+    
+    _scrollUp = (col, row) => {
+        this.props.actions.scrollUp()
+    }
+
+    scrollRight = debounced(this._scrollRight).bind(this)
+    scrollLeft = debounced(this._scrollLeft).bind(this)
+    scrollDown = debounced(this._scrollDown).bind(this)
+    scrollUp = debounced(this._scrollUp).bind(this)
+    moveCursor = debounced(this._moveCursor).bind(this)
 
     render() {
         return null
