@@ -20,17 +20,11 @@ export const colFromLetters = (string) => {
 }
 
 export const colLetterFromNumber = (origNum) => {
-    if (!Number.isInteger(origNum)) return
-    if (origNum <= 25) return ABCS[(origNum)]
-
-    let num = origNum - 26
-    const base26 = `${parseInt(String(num)).toString(26)}`.split('')
-    const letters = []
-    if (num <= 25) { letters.push('A') }
-    for (let number of base26) {
-        letters.push(ABCS[(parseInt(number, 26) + 1)])
+    let num = origNum + 1
+    for (var ret = '', a = 1, b = 26; (num -= a) >= 0; a = b, b *= 26) {
+        ret = String.fromCharCode(parseInt((num % b) / a) + 65) + ret
     }
-    return letters.join('')
+    return ret
 }
 
 

@@ -1,5 +1,5 @@
-const totalCols = 500
-const totalRows = 500
+const totalCols = 1018
+const totalRows = 1018
 
 const getStartingWidths = (totalCols) => {
     const widths = []
