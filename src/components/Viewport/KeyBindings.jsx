@@ -5,6 +5,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import _debounce from 'lodash.debounce'
 
+
+import {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+} from '../../redux/actions/constants';
+
 const debounced = (fn, wait=0) => {
     return _debounce((...args) => {
         fn(...args)
@@ -33,10 +41,10 @@ class KeyBindings extends React.Component {
 
     wheel = (e) => {
         e.preventDefault()
-        if (e.deltaX > 5) this.scrollRight()
-        if (e.deltaX < -5) this.scrollLeft()
-        if (e.deltaY > 5) this.scrollDown()
-        if (e.deltaY < -5) this.scrollUp()
+        if (e.deltaX > 10) this.scroll(RIGHT)
+        if (e.deltaX < -10) this.scroll(LEFT)
+        if (e.deltaY > 10) this.scroll(DOWN)
+        if (e.deltaY < -10) this.scroll(UP)
         
     }
 
@@ -60,9 +68,9 @@ class KeyBindings extends React.Component {
             case 37: //left
             e.preventDefault()
                 if (this.keyMap[18]) {
-                    this.scrollLeft()
+                    this.scroll(LEFT)
                 } else if (this.keyMap[91]) {
-                    this.jump('left')
+                    this.jump(LEFT)
                 } else {
                     this.moveCursor(-1, 0)
                 }
@@ -70,9 +78,9 @@ class KeyBindings extends React.Component {
             case 38: // up
                 e.preventDefault()
                 if (this.keyMap[18]) {
-                    this.scrollUp()
+                    this.scroll(UP)
                 } else if (this.keyMap[91]) {
-                    this.jump('up')
+                    this.jump(UP)
                 } else {
                     this.moveCursor(0, -1)
                 }
@@ -80,9 +88,9 @@ class KeyBindings extends React.Component {
             case 39: //right
                 e.preventDefault()
                 if (this.keyMap[18]) {
-                    this.scrollRight()
+                    this.scroll(RIGHT)
                 } else if (this.keyMap[91]) {
-                    this.jump('right')
+                    this.jump(RIGHT)
                 } else {
                     this.moveCursor(1, 0)
                 }
@@ -90,9 +98,9 @@ class KeyBindings extends React.Component {
             case 40: // down
                 e.preventDefault()
                 if (this.keyMap[18]) {
-                    this.scrollDown()
+                    this.scroll(DOWN)
                 } else if (this.keyMap[91]) {
-                    this.jump('down')
+                    this.jump(DOWN)
                 } else {
                     this.moveCursor(0, 1)
                 }
@@ -131,7 +139,7 @@ class KeyBindings extends React.Component {
     }
 
     jump = (direction) => {
-        console.log(direction)
+        this.props.actions.jump(direction)
     }
 
     
@@ -141,26 +149,11 @@ class KeyBindings extends React.Component {
         actions.setCursor(...newLocation)
     }
     
-    _scrollRight = (col, row) => {
-        this.props.actions.scrollRight()
-    }
-    
-    _scrollLeft = (col, row) => {
-        this.props.actions.scrollLeft()
-    }
-    
-    _scrollDown = (col, row) => {
-        this.props.actions.scrollDown()
-    }
-    
-    _scrollUp = (col, row) => {
-        this.props.actions.scrollUp()
+    _scroll = (direction) => {
+        this.props.actions.scroll(direction)
     }
 
-    scrollRight = debounced(this._scrollRight).bind(this)
-    scrollLeft = debounced(this._scrollLeft).bind(this)
-    scrollDown = debounced(this._scrollDown).bind(this)
-    scrollUp = debounced(this._scrollUp).bind(this)
+    scroll = debounced(this._scroll).bind(this)
     moveCursor = debounced(this._moveCursor).bind(this)
 
     render() {

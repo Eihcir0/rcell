@@ -6,10 +6,8 @@ import {
     TOGGLE_SHIFT_GRID,
 
     REFRESH_VIEWPORT,
-    SCROLL_DOWN,
-    SCROLL_LEFT,
-    SCROLL_RIGHT,
-    SCROLL_UP,
+    SCROLL,
+    JUMP,
 } from './constants'
 
 export const setCursor = (row, col) => {
@@ -28,18 +26,12 @@ export const setValue = ({value, row, col}) => {
     return { type: SET_VALUE, row, col, value }
 }
 
-export const scrollUp = (value = 1) => {
-    return { type: SCROLL_UP, value } // actually didnt do anything with this value in the reducer yet!
+export const scroll = (direction, value = 1) => {
+    return { type: SCROLL, direction, value } // actually didnt do anything with this value in the reducer yet!
 }
-export const scrollDown = (value = 1) => {
-    return { type: SCROLL_DOWN, value }
-}
-export const scrollLeft = (value = 1) => {
-    return { type: SCROLL_LEFT, value }
-}
-export const scrollRight = (value = 1) => {
-    console.log('here ok!!')
-    return { type: SCROLL_RIGHT, value }
+
+export const jump = ( direction ) => {
+    return { type: JUMP, direction }
 }
 
 export const refreshViewportDimensions = () => {
