@@ -15,13 +15,13 @@ const checkEdge = (direction, state, newCursorLocation) => {
             return newCursorLocation[1] === state.viewport[1] - 1
 
         case 'right':
-            return newCursorLocation[1] === state.viewportRight - 1
+            return newCursorLocation[1] === state.viewportRight
 
         case 'top':
             return newCursorLocation[0] === state.viewport[0] - 1
 
         case 'bottom':
-            return newCursorLocation[0] === state.viewportBottom - 1
+            return newCursorLocation[0] === state.viewportBottom
 
         default:
             return false
