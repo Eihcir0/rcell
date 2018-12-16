@@ -25,12 +25,6 @@ class KeyBindings extends React.Component {
         actions: PropTypes.object,
     }
 
-
-    
-    last_known_scrollY_position = 0
-    last_known_scrollX_position = 0
-    ticking = false
-
     keyMap = {}
     
     componentDidMount() {
@@ -52,6 +46,10 @@ class KeyBindings extends React.Component {
         this.removeKey(e.keyCode)
     }
 
+    isCommandKeyPressed = () => {
+        return this.keyMap[91] || this.keyMap[93]
+    }
+
     addKey = (key) => {
         this.keyMap[key] = true
     }
@@ -69,7 +67,7 @@ class KeyBindings extends React.Component {
             e.preventDefault()
                 if (this.keyMap[18]) {
                     this.scroll(LEFT)
-                } else if (this.keyMap[91]) {
+                } else if (this.isCommandKeyPressed()) {
                     this.jump(LEFT)
                 } else {
                     this.moveCursor(-1, 0)
@@ -79,7 +77,7 @@ class KeyBindings extends React.Component {
                 e.preventDefault()
                 if (this.keyMap[18]) {
                     this.scroll(UP)
-                } else if (this.keyMap[91]) {
+                } else if (this.isCommandKeyPressed()) {
                     this.jump(UP)
                 } else {
                     this.moveCursor(0, -1)
@@ -89,7 +87,7 @@ class KeyBindings extends React.Component {
                 e.preventDefault()
                 if (this.keyMap[18]) {
                     this.scroll(RIGHT)
-                } else if (this.keyMap[91]) {
+                } else if (this.isCommandKeyPressed()) {
                     this.jump(RIGHT)
                 } else {
                     this.moveCursor(1, 0)
@@ -99,7 +97,7 @@ class KeyBindings extends React.Component {
                 e.preventDefault()
                 if (this.keyMap[18]) {
                     this.scroll(DOWN)
-                } else if (this.keyMap[91]) {
+                } else if (this.isCommandKeyPressed()) {
                     this.jump(DOWN)
                 } else {
                     this.moveCursor(0, 1)
