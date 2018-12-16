@@ -1,5 +1,5 @@
-const totalCols = 1018
-const totalRows = 1018
+const totalCols = 100
+const totalRows = 100
 
 const getStartingWidths = (totalCols) => {
     const widths = []
@@ -30,15 +30,6 @@ const getStartingGridValues = (totalCols, totalRows) => {
       }
       grid.push(row)
     }
-    grid[2][2].displayValue = 'Richie'
-    grid[2][2].enteredValue = 'Booyah'
-    grid[2][2].calculatedValue = 'Booyah'
-    grid[3][3].displayValue = 'is'
-    grid[3][3].enteredValue = 'what'
-    grid[3][3].calculatedValue = 'what'
-    grid[4][4].displayValue = 'cool'
-    grid[4][4].enteredValue = 'omg'
-    grid[4][4].calculatedValue = 'omg'
     return grid
 }
 
@@ -51,8 +42,8 @@ const blankState = {
     values: getStartingGridValues(totalCols, totalRows),
     gridShifted: false,
     viewport: [0,0],
-    viewportBottom__cached: null,
-    viewportRight__cached: null,
+    viewportBottom: null,
+    viewportRight: null,
     widths: getStartingWidths(totalCols),
     heights: getStartingHeights(totalRows),
 }

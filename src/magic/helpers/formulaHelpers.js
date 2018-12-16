@@ -51,6 +51,16 @@ export const cellToRowCol = (cell) => {
 
 const CELL_REFERENCE_REGEX = /[a-zA-Z]+[0-9]+/ //number and a letter adjacent i.e. C3, AE111, etc.
 
+export const getCellValueObject = ({ action, grid }) => {
+    const oldCell = { ...grid[action.row][action.col] }
+    const cellValues = parseAndEvaluate({ action, grid })
+    const newCell = {
+        ...oldCell,
+        ...cellValues,
+    }
+    return newCell
+}
+
 export const parseCellValues = ({ value, grid }) => {
     const matched = value.match(CELL_REFERENCE_REGEX)
     if (matched === null) return value
@@ -63,32 +73,23 @@ export const parseCellValues = ({ value, grid }) => {
     return parseCellValues({ value: newValue, grid })
 }
 
-export const parseAndEvaluate = ({ action, state }) => {
-    const newValues = { ...state.values }
-    const newState = {
-        ...state
-    }
+export const parseAndEvaluate = ({ action, grid }) => {
+    let calculatedValue
     if (action.value !== undefined && isFormula(action.value)) {
-        const withCellValues = parseCellValues({ value: removeLeadingEquals(action.value), grid: state.values })
-        let calculatedValue
+        const withCellValues = parseCellValues({ value: removeLeadingEquals(action.value), grid })
         try {
             calculatedValue = eval(withCellValues)
         }
         catch (err) {
             calculatedValue = '!!ERROR'
         }
-        newValues[action.row][action.col].enteredValue = action.value
-        newValues[action.row][action.col].displayValue = calculatedValue
-        newValues[action.row][action.col].calculatedValue = calculatedValue
-
-
     } else {
-        newValues[action.row][action.col].enteredValue = action.value
-        newValues[action.row][action.col].displayValue = action.value
-        newValues[action.row][action.col].calculatedValue = action.value
+        calculatedValue = action.value
     }
 
-
-    newState.values = newValues
-    return newState
+    return {
+        calculatedValue,
+        enteredValue: action.value,
+        displayValue: calculatedValue,
+    }
 }

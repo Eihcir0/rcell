@@ -27,7 +27,8 @@ import {
 } from '../../magic/helpers/viewportHelpers'
 	
 import {
-	parseAndEvaluate,
+    parseAndEvaluate,
+    getCellValueObject,
 } from '../../magic/helpers/formulaHelpers'
 
 
@@ -79,34 +80,35 @@ export default function grid(state = initialState, action) {
                 cursorLocation,
             }
             offViewport = checkOffViewport(newState)
-            onEdge = checkEdges(state, newState.cursorLocation)
             if (offViewport) {
                 newViewport = offViewport
-            } else if (onEdge) {
-                newViewport = onEdge // maybe better to fire action
+            } else {
+                onEdge = checkEdges(state, newState.cursorLocation)
+                if (onEdge) {
+                    newViewport = onEdge // maybe better to fire action
+                }
             }
-
             if (newViewport) {
                 newState.viewport = newViewport
+                newState.viewportBottom = getViewportBottom(newState)
+                newState.viewportRight = getViewportRight(newState)
             }
-            newState.viewportBottom = getViewportBottom(newState)
-            newState.viewportRight = getViewportRight(newState)
             return newState
 		
-		case SET_VALUE:
-			newState = parseAndEvaluate({ action, state })
-			// const widths = []
-			// for (let i=0; i < 31; i++) {
-			// 	widths.push(100)
-			// }
-			// widths[4] = 200
-
-			// const heights = []
-			// for (let i=0; i < 31; i++) {
-			// 	heights.push(27)
-			// }
-			// heights[4] = 200
-			// newState.heights = heights
+        case SET_VALUE:
+            newState = {
+                ...state,
+                values: {
+                    ...state.values,
+                    [action.row]: {
+                        ...state.values[action.row],
+                        [action.col]: {
+                            ...state.values[action.row][action.col],
+                            ...getCellValueObject({ grid: state.values, action })
+                        }
+                    }
+                }
+            }
 			localStorage.setItem('rcell', JSON.stringify(newState))
 			return newState
 			
