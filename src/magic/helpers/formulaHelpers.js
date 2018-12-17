@@ -80,6 +80,13 @@ export const updateCellAndGrid = (props) => {
         ...cellValues,
     }
     changedCells.push(newCell)
+    /**
+     * leaving off here...
+     * I need to update the dependents prop on all the old/newproviders (delete, add)
+     * then i need recursively update all the dependents values -- figure out how to do this -- update children first, then recursive call
+     */
+    
+
     // grid = updateDependentsOfProviders(grid, newCell, oldCell)
     // if (!cellValues.error) {
     //     //iterate through dependents
@@ -139,7 +146,7 @@ export const checkCyclic = (rc, grid, visiteds) => {
 }
 
 export const acyclic = ({ action, grid }) => {
-    debugger
+    // debugger
     const visiteds = {
         [action.row]: {
             [action.col]: true
