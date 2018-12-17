@@ -78,7 +78,7 @@ export const scroll = (action, state) => {
 }
 
 export const getViewportRight = ({ widths, viewport, totalCols }) => {
-    let width = widths[viewport[1]]
+        let width = widths[viewport[1]]
     let counter = viewport[1] + 1
     for (let idx = counter; idx < totalCols; idx++) {
         if ((width + widths[idx]) < window.outerWidth - WIDTH_OFFSET_PX) {

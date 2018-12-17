@@ -12,15 +12,17 @@ import {
 
 import {
 	offGrid,
-    checkEdges,
 } from '../../magic/helpers/gridHelpers'
+	
+import {
+	setLocalStorage,
+} from '../../magic/helpers/fileHelpers'
 	
 import {
     jump,
 } from '../../magic/helpers/jump'
 	
 import {
-    checkOffViewport,
 	getViewportRight,
     getViewportBottom,
     scroll,
@@ -28,22 +30,17 @@ import {
 } from '../../magic/helpers/viewportHelpers'
 	
 import {
-    parseAndEvaluate,
-    getCellValueObject,
+    updateCellAndGrid,
 } from '../../magic/helpers/formulaHelpers'
 
 
 export default function grid(state = initialState, action) {
 	let newState
-    let newViewport
-    let onEdge
-    let offViewport
     let newCursorLocation
 
 	switch (action.type) {
         case SCROLL:
             return scroll(action, state)
-
 
 		case SET_EDITING:
 			newState = {
@@ -74,21 +71,13 @@ export default function grid(state = initialState, action) {
             }
 		
         case SET_VALUE:
-            newState = {
+            const newGrid = updateCellAndGrid({grid: state.values, action})
+			newState = {
                 ...state,
-                values: {
-                    ...state.values,
-                    [action.row]: {
-                        ...state.values[action.row],
-                        [action.col]: {
-                            ...state.values[action.row][action.col],
-                            ...getCellValueObject({ grid: state.values, action })
-                        }
-                    }
-                }
+                values: newGrid
             }
-			localStorage.setItem('rcell', JSON.stringify(newState))
-			return newState
+            setLocalStorage('rcell', newState)
+            return newState
 			
 		case TOGGLE_SHIFT_GRID:
 			newState = {

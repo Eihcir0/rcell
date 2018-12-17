@@ -26,9 +26,25 @@ const getStartingGridValues = (totalCols, totalRows) => {
             enteredValue: '',
             displayValue: '',
             calculatedValue: '',
+            row: rowIdx,
+            col: colIdx,
           })
       }
       grid.push(row)
+    }
+    grid[0][0] = {
+        ...grid[0][0],
+        enteredValue: '=b1',
+        displayValue: 1,
+        calculatedValue: 1,
+        providers: [[0,1]]
+    }
+    grid[0][1] = {
+        ...grid[0][1],
+        enteredValue: '1',
+        displayValue: 1,
+        calculatedValue: 1,
+        dependents: [[0,0]]
     }
     return grid
 }
@@ -48,7 +64,7 @@ const blankState = {
     heights: getStartingHeights(totalRows),
 }
 
-const localState = localStorage.getItem('rcell')
+const localState = localStorage.getItem('xxxrcell')
 const initialState = localState ? JSON.parse(localState) : blankState
 initialState.viewportRight = 20
 initialState.viewportBottom = 20
