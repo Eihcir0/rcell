@@ -5,32 +5,35 @@ import {
     RIGHT,
 } from '../../redux/actions/constants';
 
+import {
+    checkEdges,
+} from '../helpers/gridHelpers'
+
 //Miscellaneous constants
 const WIDTH_OFFSET_PX = 0
 const HEIGHT_OFFSET_PX = 100
 
-export const checkOffViewport = (state) => {
+export const checkOffViewport = ({state, newCursorLocation}) => {
     const {
         viewport,
-        cursorLocation,
         viewportRight,
         viewportBottom,
     } = state
     const newViewport = [...viewport]
     let updated = false
-    if (cursorLocation[1] < viewport[1]) {
-        newViewport[1] = cursorLocation[1]
+    if (newCursorLocation[1] < viewport[1]) {
+        newViewport[1] = newCursorLocation[1]
         updated = true
-    } else if (cursorLocation[1] > viewportRight) {
-        newViewport[1] = cursorLocation[1]
+    } else if (newCursorLocation[1] > viewportRight) {
+        newViewport[1] = newCursorLocation[1]
         newViewport[1] = Math.min(getViewportLeft({ ...state, viewport: newViewport }), newViewport[1])
         updated = true
     }
-    if (cursorLocation[0] < viewport[0]) {
-        newViewport[0] = cursorLocation[0]
+    if (newCursorLocation[0] < viewport[0]) {
+        newViewport[0] = newCursorLocation[0]
         updated = true
-    } else if (cursorLocation[0] > viewportBottom) {
-        newViewport[0] = cursorLocation[0]
+    } else if (newCursorLocation[0] > viewportBottom) {
+        newViewport[0] = newCursorLocation[0]
         newViewport[0] = Math.min(getViewportTop({ ...state, viewport: newViewport }), newViewport[0])
         updated = true
     }
@@ -43,6 +46,8 @@ export const scroll = (action, state) => {
         viewportRight,
         totalCols,
         totalRows,
+        heights,
+        widths,
     } = state
 
     const [viewportRow, viewportCol] = state.viewport
@@ -66,18 +71,13 @@ export const scroll = (action, state) => {
         ...state,
         viewport,
     }
-    newState.viewportBottom = getViewportBottom(newState)
-    newState.viewportRight = getViewportRight(newState)
+    newState.viewportBottom = getViewportBottom({ heights, viewport, totalRows })
+    newState.viewportRight = getViewportRight({ widths, viewport, totalCols })
     return newState
 
 }
 
-export const getViewportRight = (state) => {
-    const {
-        widths,
-        viewport,
-        totalCols,
-    } = state
+export const getViewportRight = ({ widths, viewport, totalCols }) => {
     let width = widths[viewport[1]]
     let counter = viewport[1] + 1
     for (let idx = counter; idx < totalCols; idx++) {
@@ -130,12 +130,7 @@ export const getViewportTop = (state) => {
 
 }
 
-export const getViewportBottom = (state) => {
-    const {
-        heights,
-        viewport,
-        totalRows,
-    } = state
+export const getViewportBottom = ({ heights, viewport, totalRows }) => {
     let height = heights[viewport[0]]
     let counter = viewport[0] + 1
     for (let idx = counter; idx < totalRows; idx++) {
@@ -147,4 +142,32 @@ export const getViewportBottom = (state) => {
         }
     }
     return counter
+}
+
+export const validatedViewPort = ({ state, newCursorLocation }) => {
+    let newViewport = false
+    const offViewport = checkOffViewport({ state, newCursorLocation }) // returns false or new viewport values
+    if (offViewport) {
+        newViewport = offViewport
+    } else {
+        const onEdge = checkEdges({ state, newCursorLocation })
+        if (onEdge) {
+            newViewport = onEdge // maybe better to fire action
+        }
+    }
+    const {
+        heights,
+        widths,
+        totalCols,
+        totalRows,
+    } = state
+
+    if (newViewport) {
+        return {
+            viewport: newViewport,
+            viewportBottom: getViewportBottom({ heights, viewport: newViewport, totalRows }),
+            viewportRight: getViewportRight({ widths, viewport: newViewport, totalCols }),
+        }
+    } else return {}
+
 }

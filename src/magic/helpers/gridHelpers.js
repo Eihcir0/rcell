@@ -28,25 +28,30 @@ const checkEdge = (direction, state, newCursorLocation) => {
     }
 }
 
-export const checkEdges = (state, newCursorLocation) => {
+export const checkEdges = ({state, newCursorLocation}) => {
     const newViewport = [...state.viewport]
+    let updated = false
     if (checkEdge('left', state, newCursorLocation)) {
+        updated = true
         newViewport[1] -= 1
     }
     if (checkEdge('right', state, newCursorLocation)) {
         if (state.cursorLocation[1] < newCursorLocation[1]) {
+            updated = true
             newViewport[1] += 1
         }
     }
     if (checkEdge('top', state, newCursorLocation)) {
+        updated = true
         newViewport[0] -= 1
     }
     if (checkEdge('bottom', state, newCursorLocation)) {
         if (state.cursorLocation[0] < newCursorLocation[0]) {
+            updated = true
             newViewport[0] += 1
         }
     }
-    return newViewport
+    return updated && newViewport
 
 
 }

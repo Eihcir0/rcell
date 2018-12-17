@@ -24,6 +24,7 @@ import {
 	getViewportRight,
     getViewportBottom,
     scroll,
+    validatedViewPort,
 } from '../../magic/helpers/viewportHelpers'
 	
 import {
@@ -37,6 +38,7 @@ export default function grid(state = initialState, action) {
     let newViewport
     let onEdge
     let offViewport
+    let newCursorLocation
 
 	switch (action.type) {
         case SCROLL:
@@ -53,47 +55,23 @@ export default function grid(state = initialState, action) {
 		
 		case SET_CURSOR:
 			if (offGrid(state, [action.row, action.col])) {
-                return state}
-            newState = {
-                ...state,
-                cursorLocation: [action.row, action.col],
+                return state
             }
-            offViewport = checkOffViewport(newState)
-            onEdge = checkEdges(state, newState.cursorLocation)
-            if (offViewport) {
-                newViewport = offViewport
-            } else if (onEdge) {
-                newViewport = onEdge // maybe better to fire action
+            newCursorLocation = [action.row, action.col]
+
+            return {
+                ...state,
+                cursorLocation: newCursorLocation,
+                ...validatedViewPort({state, newCursorLocation}),
             }
 
-            if (newViewport) {
-                newState.viewport = newViewport
-            }
-            newState.viewportBottom = getViewportBottom(newState)
-            newState.viewportRight = getViewportRight(newState)
-            return newState
-		
         case JUMP:
-            const cursorLocation = jump(action.direction, state)
-            newState = {
+            newCursorLocation = jump(action.direction, state)
+            return {
                 ...state,
-                cursorLocation,
+                cursorLocation: newCursorLocation,
+                ...validatedViewPort({ state, newCursorLocation }),
             }
-            offViewport = checkOffViewport(newState)
-            if (offViewport) {
-                newViewport = offViewport
-            } else {
-                onEdge = checkEdges(state, newState.cursorLocation)
-                if (onEdge) {
-                    newViewport = onEdge // maybe better to fire action
-                }
-            }
-            if (newViewport) {
-                newState.viewport = newViewport
-                newState.viewportBottom = getViewportBottom(newState)
-                newState.viewportRight = getViewportRight(newState)
-            }
-            return newState
 		
         case SET_VALUE:
             newState = {
