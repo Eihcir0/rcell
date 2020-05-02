@@ -18,15 +18,11 @@ class CellEditor extends React.PureComponent {
         value: this.props.value,
     }
 
-    componentDidMount() {
-        this.props.actions.resetStartingEditorValue()
-    }
-
     handleChange =  (e) => {
         this.cursor = e.target.selectionStart;
         this.setState({ value: e.target.value });
     }
-    
+
     handleEnter = ()=> {
         const { row, col, } = this.props
         const { value } = this.state
@@ -46,19 +42,27 @@ class CellEditor extends React.PureComponent {
         this.props.actions.setEditing({off: true})
         this.props.handleChange()
     }
-    
+
+    handleArrow = (e) => {
+        const { row, col, } = this.props
+        const { value } = this.state
+        this.props.actions.setValue({ value, row, col })
+        this.props.actions.setEditing({off: true})
+        this.props.handleChange()
+    }
+
     handleKeyPress = (e) => {
         switch (e.charCode) {
             case 13:
             e.preventDefault()
             this.handleEnter()
             break;
-            
+
             default:
             break;
         }
     }
-    
+
     handleKeyDown = (e) => {
         //change to using descriptive `key` not keycode
         switch (e.key) {
@@ -66,12 +70,22 @@ class CellEditor extends React.PureComponent {
             e.preventDefault()
                 this.handleTab()
                 break;
-        
+
+            case 'ArrowDown':
+            e.preventDefault()
+                this.handleArrow()
+                break;
+
+            case 'ArrowUp':
+            e.preventDefault()
+                this.handleArrow()
+                break;
+
             case 'Escape':
             e.preventDefault()
                 this.handleEsc()
                 break;
-        
+
             default:
                 break;
         }

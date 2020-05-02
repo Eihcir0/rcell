@@ -13,6 +13,8 @@ import {
     RIGHT,
 } from '../../redux/actions/constants';
 
+const EDIT_KEYS = new Set('1234567890-=!@#$%^&*()_+qwertyuiop[]\QWERTYUIOP{}|asdfghjkl;ASDFGHJKL:zxcvbnm,./ZXCVBNM<>?'.split(''))
+
 const debounced = (fn, wait=0) => {
     return debounce((...args) => {
         fn(...args)
@@ -120,6 +122,11 @@ class KeyBindings extends React.Component {
                 this.enterEdit()
                 break;
             default:
+                e.preventDefault()
+
+                if  (EDIT_KEYS.has(e.key)) {
+                    this.enterEdit(e.key)
+                }
                 break;
         }
     }
