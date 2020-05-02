@@ -73,7 +73,7 @@ body {
     grid-area: header;
     position: fixed;
     width: 100000px;
-    top: 5.5rem;
+    top: 5.9rem;
     left: 2rem;}
 
 .cell {
@@ -152,7 +152,7 @@ body {
 .header-cell.corner {
     grid-area: selectAll;
     position: fixed;
-    top: 5.5rem;
+    top: 5.9rem;
     z-index: 1000;
     width: 2rem;
     background-image: linear-gradient(135deg,black, grey, white,  #61242491,  #61242491) !important;

@@ -3,7 +3,7 @@ import {bindActionCreators} from 'redux'
 import * as actions from '../../redux/actions/actions'
 import PropTypes from 'prop-types'
 import React from 'react'
-import _debounce from 'lodash.debounce'
+import debounce from 'lodash/debounce'
 
 
 import {
@@ -14,7 +14,7 @@ import {
 } from '../../redux/actions/constants';
 
 const debounced = (fn, wait=0) => {
-    return _debounce((...args) => {
+    return debounce((...args) => {
         fn(...args)
     }, wait)
 }
