@@ -10,7 +10,7 @@ import {
 } from '../helpers/gridHelpers'
 
 //Miscellaneous constants
-const WIDTH_OFFSET_PX = 0
+const WIDTH_OFFSET_PX = 0 // NEED TO REVIEW THESE -- for now hacky hardcoding adjustment to counter
 const HEIGHT_OFFSET_PX = 100
 
 export const checkOffViewport = ({state, newCursorLocation}) => {
@@ -88,7 +88,7 @@ export const getViewportRight = ({ widths, viewport, totalCols }) => {
             break
         }
     }
-    return counter
+    return counter - 13
 
 }
 
@@ -141,7 +141,7 @@ export const getViewportBottom = ({ heights, viewport, totalRows }) => {
             break
         }
     }
-    return counter
+    return counter  + 5 // hmm this is a little weird here ... why plus 5?
 }
 
 export const validatedViewPort = ({ state, newCursorLocation }) => {

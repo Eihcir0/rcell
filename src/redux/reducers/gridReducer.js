@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { 
+import {
 	SET_CURSOR,
 	SET_EDITING,
 	SET_VALUE,
@@ -13,22 +13,22 @@ import {
 import {
 	offGrid,
 } from '../../magic/helpers/gridHelpers'
-	
+
 import {
 	setLocalStorage,
 } from '../../magic/helpers/fileHelpers'
-	
+
 import {
     jump,
 } from '../../magic/helpers/jump'
-	
+
 import {
 	getViewportRight,
     getViewportBottom,
     scroll,
     validatedViewPort,
 } from '../../magic/helpers/viewportHelpers'
-	
+
 import {
     updateCellAndGrid,
 } from '../../magic/helpers/formulaHelpers'
@@ -49,7 +49,7 @@ export default function grid(state = initialState, action) {
 				cellEditorStartingValue: action.value,
 			}
 			return newState
-		
+
 		case SET_CURSOR:
 			if (offGrid(state, [action.row, action.col])) {
                 return state

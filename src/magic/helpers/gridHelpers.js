@@ -3,7 +3,7 @@ export const offGrid = (state, proposedLocation) => {
         proposedLocation[0] < 0 ||
         proposedLocation[0] >= state.totalRows ||
         proposedLocation[1] < 0 ||
-        proposedLocation[1] >= state.totalCols
+        proposedLocation[1] >= state.totalCols - 1
     )
     console.log(`${ret ? 'OFFGRID!' : ''}`)
     return ret
@@ -15,13 +15,13 @@ const checkEdge = (direction, state, newCursorLocation) => {
             return newCursorLocation[1] === state.viewport[1] - 1
 
         case 'right':
-            return newCursorLocation[1] === state.viewportRight
+            return newCursorLocation[1] === state.viewportRight - 3
 
         case 'top':
             return newCursorLocation[0] === state.viewport[0] - 1
 
         case 'bottom':
-            return newCursorLocation[0] === state.viewportBottom
+            return newCursorLocation[0] === state.viewportBottom - 4
 
         default:
             return false

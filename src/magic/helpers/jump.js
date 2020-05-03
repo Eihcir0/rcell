@@ -22,7 +22,7 @@ export const jump = (direction, state) => {
         let rowIdx
         if (direction === RIGHT) {
             colIdx = col + 1
-            while (colIdx < totalCols) {
+            while (colIdx < totalCols - 1) {
                 if (!_cellEmpty([row, colIdx])) {
                     return [row, colIdx]
                 }
