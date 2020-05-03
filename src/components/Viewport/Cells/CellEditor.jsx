@@ -14,6 +14,8 @@ class CellEditor extends React.PureComponent {
         col: PropTypes.number,
     }
 
+    ref = React.createRef()
+
     state = {
         value: this.props.value,
     }
@@ -76,6 +78,13 @@ class CellEditor extends React.PureComponent {
                 this.handleArrow()
                 break;
 
+            case 'ArrowLeft':
+                if (this.ref.current.selectionStart == 0) {
+                    e.preventDefault()
+                    this.handleArrow()
+                }
+                break;
+
             case 'ArrowUp':
             e.preventDefault()
                 this.handleArrow()
@@ -101,6 +110,7 @@ class CellEditor extends React.PureComponent {
         return (
             <div className={this.getClass()}>
                 <input
+                    ref={this.ref}
                     className="cell-editor-input"
                     type="text"
                     value={this.state.value}
