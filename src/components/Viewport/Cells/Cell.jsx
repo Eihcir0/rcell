@@ -22,13 +22,13 @@ class Cell extends React.Component {
     getClass = () => {
         let className = this.props.isCursor ? 'cell cursor' : 'cell'
         return className
-        
+
     }
-    
+
     getContainerClass = () => {
         let className = 'cell-container'
         if (this.state.flip) className += ' flip'
-        return className    
+        return className
     }
 
     setFlip = () => {
@@ -39,7 +39,7 @@ class Cell extends React.Component {
             this.setState({flip: false})
         }, 1000)
     }
-    
+
     handleChange = () => {
         this.setFlip()
     }
@@ -48,7 +48,7 @@ class Cell extends React.Component {
         const { row, col, actions, isCursor } = this.props
         if (!isCursor) actions.setCursor(row, col)
     }
-    
+
     handleDoubleClick = () => {
         const { row, col, actions, isEditing } = this.props
         if (!isEditing) {

@@ -28,7 +28,7 @@ class KeyBindings extends React.Component {
     }
 
     keyMap = {}
-    
+
     componentDidMount() {
         window.addEventListener('keydown', this.keyDown.bind(this))
         window.addEventListener('keyup', this.keyUp.bind(this))
@@ -41,7 +41,7 @@ class KeyBindings extends React.Component {
         if (e.deltaX < -10) this.scroll(LEFT)
         if (e.deltaY > 10) this.scroll(DOWN)
         if (e.deltaY < -10) this.scroll(UP)
-        
+
     }
 
     keyUp = (e) => {
@@ -59,7 +59,7 @@ class KeyBindings extends React.Component {
     removeKey = (key) => {
         this.keyMap[key] = false
     }
-    
+
     keyDown = (e) => {
         this.addKey(e.keyCode)
         if (this.props.editingLocation && this.props.editingLocation.length) return
@@ -147,13 +147,13 @@ class KeyBindings extends React.Component {
         this.props.actions.jump(direction)
     }
 
-    
+
     _moveCursor = (col, row) => {
         const { cursorLocation, actions } = this.props
         const newLocation = [row + cursorLocation[0], col + cursorLocation[1]]
         actions.setCursor(...newLocation)
     }
-    
+
     _scroll = (direction) => {
         this.props.actions.scroll(direction)
     }

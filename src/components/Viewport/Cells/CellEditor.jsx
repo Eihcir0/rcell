@@ -30,11 +30,11 @@ class CellEditor extends React.PureComponent {
         this.props.actions.setValue({ value, row, col }) // make it a promise here?
         this.props.handleChange()
     }
-    
+
     handleEsc = (e) => {
         this.props.actions.setEditing({off: true})
     }
-    
+
     handleTab = (e) => {
         const { row, col, } = this.props
         const { value } = this.state
@@ -97,14 +97,14 @@ class CellEditor extends React.PureComponent {
     }
 
     render() {
-        
+        console.log(this.state, this.state.value)
         return (
             <div className={this.getClass()}>
-                <input 
+                <input
                     className="cell-editor-input"
-                    type="text" 
+                    type="text"
                     value={this.state.value}
-                    onChange={this.handleChange} 
+                    onChange={this.handleChange}
                     onKeyPress={this.handleKeyPress}
                     onKeyDown={this.handleKeyDown}
                     autoFocus

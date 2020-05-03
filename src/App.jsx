@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ToolBar from './components/Tools/ToolBar'
+import FunctionBar from './components/FunctionBar/FunctionBar'
 import Viewport from './components/Viewport/Viewport';
 class App extends Component {
     render() {
@@ -8,7 +9,7 @@ class App extends Component {
                 <div className="upper section">
                     <div className='menu-bar'>Menus</div>
                     <ToolBar/>
-                    <div className='function-bar'>FUNCTION BAR</div>
+                    <FunctionBar/>
                 </div>
                 <Viewport/>
             </div>
